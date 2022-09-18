@@ -187,15 +187,22 @@ struct UtilityView: View {
                         changeColour(colour: UIColor(dotColour))
                         showingAlert.toggle()
                     }.disabled(badgeButtonDiabled())
-                    .alert("Done!", isPresented: $showingAlert
-                    ) {
-                        Button("Respring") {
-                            let helper = ObjcHelper()
-                            helper.respring()
-                        }
-                        Button(role: .cancel, action: {}, label: {Text("Respring Later")})
-                    } message: {
-                        Text("Respring required to apply changes.")
+                    .alert(isPresented: $showingAlert) {
+                        Alert(
+                            title: Text("Done!"),
+                            message: Text("Respring your device to apply changes."),
+                            primaryButton: .default(
+                                Text("Respring"),
+                                action: {
+                                    let helper = ObjcHelper()
+                                    helper.respring()
+                                }
+                            ),
+                            secondaryButton: .cancel(
+                                Text("Respring Later"),
+                                action: {}
+                            )
+                        )
                     }
                 }
                 
