@@ -7,18 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0B9DC028D606A900FFAB36 /* ObjcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */; };
+		8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */; };
+		8B10987F28D7192200732734 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B10987E28D7192200732734 /* Alamofire */; };
 		8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */; };
 		8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1928D4FE36005265FE /* ContentView.swift */; };
 		8BC10E1C28D4FE37005265FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC10E1B28D4FE37005265FE /* Assets.xcassets */; };
 		8BC10E1F28D4FE37005265FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC10E1E28D4FE37005265FE /* Preview Assets.xcassets */; };
+		8BC10E2628D509E4005265FE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E2528D509E4005265FE /* HomeView.swift */; };
+		8BC10E2828D5148B005265FE /* UtilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E2728D5148B005265FE /* UtilityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B0B9DBD28D606A800FFAB36 /* mugunghwa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mugunghwa-Bridging-Header.h"; sourceTree = "<group>"; };
+		8B0B9DBE28D606A900FFAB36 /* ObjcHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcHelper.h; sourceTree = "<group>"; };
+		8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcHelper.m; sourceTree = "<group>"; };
+		8B0B9DC328D6AF0E00FFAB36 /* MGPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGPreferences.h; sourceTree = "<group>"; };
+		8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGPreferences.m; sourceTree = "<group>"; };
 		8BC10E1428D4FE36005265FE /* mugunghwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mugunghwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mugunghwaApp.swift; sourceTree = "<group>"; };
 		8BC10E1928D4FE36005265FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8BC10E1B28D4FE37005265FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BC10E1E28D4FE37005265FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8BC10E2528D509E4005265FE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8BC10E2728D5148B005265FE /* UtilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B10987F28D7192200732734 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +66,15 @@
 			children = (
 				8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */,
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
+				8BC10E2528D509E4005265FE /* HomeView.swift */,
+				8BC10E2728D5148B005265FE /* UtilityView.swift */,
 				8BC10E1B28D4FE37005265FE /* Assets.xcassets */,
 				8BC10E1D28D4FE37005265FE /* Preview Content */,
+				8B0B9DBE28D606A900FFAB36 /* ObjcHelper.h */,
+				8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */,
+				8B0B9DC328D6AF0E00FFAB36 /* MGPreferences.h */,
+				8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */,
+				8B0B9DBD28D606A800FFAB36 /* mugunghwa-Bridging-Header.h */,
 			);
 			path = mugunghwa;
 			sourceTree = "<group>";
@@ -83,6 +103,9 @@
 			dependencies = (
 			);
 			name = mugunghwa;
+			packageProductDependencies = (
+				8B10987E28D7192200732734 /* Alamofire */,
+			);
 			productName = mugunghwa;
 			productReference = 8BC10E1428D4FE36005265FE /* mugunghwa.app */;
 			productType = "com.apple.product-type.application";
@@ -99,6 +122,7 @@
 				TargetAttributes = {
 					8BC10E1328D4FE36005265FE = {
 						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1400;
 					};
 				};
 			};
@@ -111,6 +135,9 @@
 				Base,
 			);
 			mainGroup = 8BC10E0B28D4FE36005265FE;
+			packageReferences = (
+				8B10987D28D7192200732734 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 8BC10E1528D4FE36005265FE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +164,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */,
+				8BC10E2628D509E4005265FE /* HomeView.swift in Sources */,
 				8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */,
+				8B0B9DC028D606A900FFAB36 /* ObjcHelper.m in Sources */,
 				8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */,
+				8BC10E2828D5148B005265FE /* UtilityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +226,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -264,26 +295,35 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mugunghwa/Preview Content\"";
 				DEVELOPMENT_TEAM = GK39GPB6KU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Mugunghwa;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwa;
+				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "mugunghwa/mugunghwa-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -294,26 +334,34 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mugunghwa/Preview Content\"";
 				DEVELOPMENT_TEAM = GK39GPB6KU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Mugunghwa;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwa;
+				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "mugunghwa/mugunghwa-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -341,6 +389,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B10987D28D7192200732734 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B10987E28D7192200732734 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B10987D28D7192200732734 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8BC10E0C28D4FE36005265FE /* Project object */;
 }
