@@ -122,6 +122,7 @@ func checkAndCreateBackupFolder() {
 }
 
 func getCurrentState() -> Bool {
+    checkAndCreateBackupFolder()
     let helper = ObjcHelper()
     let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
     
@@ -206,7 +207,7 @@ struct UtilityView: View {
                         showingAlert.toggle()
                     }.disabled(homeGestureButtonDisabled(homeGesture))
                 }
-            }.headerProminence(.increased)
+            }
             .navigationTitle("Utilities")
         }
     }
