@@ -161,6 +161,7 @@ func homeGestureButtonDisabled(_ enabled: Bool) -> Bool {
         return true
     }
     
+    checkAndCreateBackupFolder()
     let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
     if prefs.dictionary["DeviceSubType"] == nil && !enabled {
         return true
