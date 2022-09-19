@@ -207,7 +207,7 @@ struct UtilityView: View {
                     }
                 }
                 
-                Section(header: Text("Home Gesture")) {
+                Section(header: Text("Home Gesture"), footer: Text("Note: This manipulates to iPhone XS layout. It is totally safe but you may experience some UI glitches and screenshot is not working at the moment.")) {
                     Toggle("Enabled", isOn: $homeGesture)
                         .disabled(homeGestureToggleDisabled())
                     Button("Apply") {
