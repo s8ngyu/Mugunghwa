@@ -30,6 +30,25 @@
     [img writeToCPBitmapFile:path flags:1];
 }
 
+-(void)respring {
+    killall(@"SpringBoard");
+    exit(0);
+}
+
+-(UIImage *)getImageFromData:(NSString *)path {    
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    return image;
+}
+
+-(void)saveImage:(UIImage *)image atPath:(NSString *)path {
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
+}
+
+// MARK: - TSUtil
+
 void enumerateProcessesUsingBlock(void (^enumerator)(pid_t pid, NSString* executablePath, BOOL* stop)) {
     static int maxArgumentSize = 0;
     if (maxArgumentSize == 0) {
@@ -83,10 +102,5 @@ void killall(NSString* processName) {
             kill(pid, SIGTERM);
         }
     });
-}
-
--(void)respring {
-    killall(@"SpringBoard");
-    exit(0);
 }
 @end

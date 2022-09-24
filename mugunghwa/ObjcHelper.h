@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)updateDeviceSubType:(NSInteger)deviceSubType;
 -(void)imageToCPBitmap:(UIImage *)img path:(NSString *)path;
 -(void)respring;
+-(UIImage *)getImageFromData:(NSString *)path;
+-(void)saveImage:(UIImage *)image atPath:(NSString *)path;
 @end
 
 NS_ASSUME_NONNULL_END
