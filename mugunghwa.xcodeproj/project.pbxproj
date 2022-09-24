@@ -10,6 +10,7 @@
 		8B0B9DC028D606A900FFAB36 /* ObjcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */; };
 		8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */; };
 		8B10987F28D7192200732734 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B10987E28D7192200732734 /* Alamofire */; };
+		8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */; };
 		8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */; };
 		8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1928D4FE36005265FE /* ContentView.swift */; };
 		8BC10E1C28D4FE37005265FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC10E1B28D4FE37005265FE /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcHelper.m; sourceTree = "<group>"; };
 		8B0B9DC328D6AF0E00FFAB36 /* MGPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGPreferences.h; sourceTree = "<group>"; };
 		8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGPreferences.m; sourceTree = "<group>"; };
+		8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeThemeView.swift; sourceTree = "<group>"; };
 		8BC10E1428D4FE36005265FE /* mugunghwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mugunghwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mugunghwaApp.swift; sourceTree = "<group>"; };
 		8BC10E1928D4FE36005265FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
 				8BC10E2528D509E4005265FE /* HomeView.swift */,
 				8BC10E2728D5148B005265FE /* UtilityView.swift */,
+				8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */,
 				8BC10E1B28D4FE37005265FE /* Assets.xcassets */,
 				8BC10E1D28D4FE37005265FE /* Preview Content */,
 				8B0B9DBE28D606A900FFAB36 /* ObjcHelper.h */,
@@ -169,6 +172,7 @@
 				8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */,
 				8B0B9DC028D606A900FFAB36 /* ObjcHelper.m in Sources */,
 				8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */,
+				8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */,
 				8BC10E2828D5148B005265FE /* UtilityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,7 +319,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -354,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
