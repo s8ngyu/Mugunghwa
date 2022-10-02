@@ -9,6 +9,12 @@
 
 @implementation ObjcHelper
 
+-(id)init {
+    self = [super init];
+    
+    return self;
+}
+
 -(NSNumber *)getDeviceSubType {
     NSString *plistFullPath = [@"/private/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/" stringByAppendingPathComponent:@"com.apple.MobileGestalt.plist"];
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:plistFullPath];

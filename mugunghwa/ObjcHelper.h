@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface ObjcHelper : NSObject
+-(id)init;
 -(NSNumber *)getDeviceSubType;
 -(void)updateDeviceSubType:(NSInteger)deviceSubType;
 -(void)imageToCPBitmap:(UIImage *)img path:(NSString *)path;
