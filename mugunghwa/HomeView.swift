@@ -193,7 +193,7 @@ struct UtilButtonView: View {
                 }
                 
                 Button(action: {
-                    let helper = ObjcHelper()
+                    let helper = ObjcHelper.init()
                     helper.respring()
                 }) {
                     VStack {
@@ -238,7 +238,7 @@ struct UtilButtonView: View {
                 }
                 
                 Button(action: {
-                    let helper = ObjcHelper()
+                    let helper = ObjcHelper.init()
                     helper.respring()
                 }) {
                     VStack {
