@@ -35,8 +35,8 @@ fi
 ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
 mkdir Payload
 cp -r Mugunghwa.app Payload/Mugunghwa.app
+zip -vr Mugunghwa.tipa Payload
 zip -vr Mugunghwa.ipa Payload
 rm -rf Mugunghwa.app
 rm -rf DerivedDataApp
 rm -rf Payload
-zip -vr share.zip Mugunghwa.ipa
