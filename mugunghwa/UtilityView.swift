@@ -20,7 +20,7 @@ func changeColour(colour: UIColor) {
     let savePath = "/var/mobile/SBIconBadgeView.BadgeBackground:26:26.cpbitmap"
     let targetPath = "/var/mobile/Library/Caches/MappedImageCache/Persistent/SBIconBadgeView.BadgeBackground:26:26.cpbitmap"
     
-    let helper = ObjcHelper()
+    let helper = ObjcHelper.init()
     helper.image(toCPBitmap: badge, path: savePath)
     
     let fileManager = FileManager.default
@@ -89,7 +89,7 @@ func badgeButtonDiabled() -> Bool {
 func applyHomeGuesture(_ enabled: Bool) {
     if enabled {
         // Enable
-        let helper = ObjcHelper()
+        let helper = ObjcHelper.init()
         checkAndCreateBackupFolder()
         
         let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
@@ -102,7 +102,7 @@ func applyHomeGuesture(_ enabled: Bool) {
     } else {
         // Disable
         checkAndCreateBackupFolder()
-        let helper = ObjcHelper()
+        let helper = ObjcHelper.init()
         let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
         if prefs.dictionary["DeviceSubType"] != nil {
             helper.updateDeviceSubType(prefs.dictionary["DeviceSubType"] as! Int)
@@ -123,7 +123,7 @@ func checkAndCreateBackupFolder() {
 
 func getCurrentState() -> Bool {
     checkAndCreateBackupFolder()
-    let helper = ObjcHelper()
+    let helper = ObjcHelper.init()
     let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
     
     if prefs.dictionary["DeviceSubType"] != nil {
@@ -195,7 +195,7 @@ struct UtilityView: View {
                             primaryButton: .default(
                                 Text("Respring"),
                                 action: {
-                                    let helper = ObjcHelper()
+                                    let helper = ObjcHelper.init()
                                     helper.respring()
                                 }
                             ),
