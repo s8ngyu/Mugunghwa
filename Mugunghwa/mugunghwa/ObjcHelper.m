@@ -53,13 +53,6 @@
     [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
 }
 
-
-
-    
-    
-    
-}
-
 // MARK: - TSUtil
 NSString* getNSStringFromFile(int fd)
 {
