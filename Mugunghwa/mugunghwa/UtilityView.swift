@@ -217,6 +217,11 @@ struct UtilityView: View {
                 }.onAppear() {
                 }
                 
+                Section(header: Text("Passcode Theming")) {
+                    NavigationLink(destination: PasscodeThemeView(), label: {
+                        Text("Configuration")
+                    }).disabled(checkSandbox())
+                }
             }
             .navigationTitle("Utilities")
         }
