@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ObjcHelper : NSObject
+@interface ObjcHelper : NSObject {
+    NSString *helperPath;
+}
 -(id)init;
 -(NSNumber *)getDeviceSubType;
 -(void)updateDeviceSubType:(NSInteger)deviceSubType;
@@ -34,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)respring;
 -(UIImage *)getImageFromData:(NSString *)path;
 -(void)saveImage:(UIImage *)image atPath:(NSString *)path;
+-(void)testAppIcon;
 @end
 
 NS_ASSUME_NONNULL_END

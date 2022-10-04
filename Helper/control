@@ -1,0 +1,9 @@
+Package: me.soongyu.mugunghwahelper
+Name: mugunghwahelper
+Version: 1.0
+Architecture: iphoneos-arm
+Description: An awesome tool for Mugunghwa
+Maintainer: Soongyu Kwon
+Author: Soongyu Kwon
+Section: System
+Tag: role::hacker

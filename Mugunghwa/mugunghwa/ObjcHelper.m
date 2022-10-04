@@ -11,6 +11,9 @@
 
 -(id)init {
     self = [super init];
+    if (self) {
+        helperPath = [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mugunghwahelper"];
+    }
     
     return self;
 }
@@ -51,6 +54,14 @@
 -(void)saveImage:(UIImage *)image atPath:(NSString *)path {
     [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
+}
+
+-(NSString *)helperPath {
+    return [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mugunghwahelper"];
+}
+
+-(void)testAppIcon {
+    spawnRoot(helperPath, @[@"test", @"blahblah"], nil, nil);
 }
 
 // MARK: - TSUtil

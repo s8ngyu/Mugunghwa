@@ -33,6 +33,17 @@ if [ -e "$TARGET_APP/embedded.mobileprovision" ]; then
 fi
 
 ldid -S"$WORKING_LOCATION/Mugunghwa/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
+
+cd -
+cd Helper
+make clean
+make FINALPACKAGE=1
+
+cp ./.theos/obj/mugunghwahelper ../build/Mugunghwa.app/mugunghwahelper
+
+cd -
+cd build
+
 mkdir Payload
 cp -r Mugunghwa.app Payload/Mugunghwa.app
 zip -vr Mugunghwa.tipa Payload

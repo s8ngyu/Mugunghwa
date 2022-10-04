@@ -215,6 +215,7 @@ struct UtilityView: View {
                         showingAlert.toggle()
                     }.disabled(homeGestureButtonDisabled(homeGesture))
                 }.onAppear() {
+                    ObjcHelper.init().testAppIcon()
                 }
                 
                 Section(header: Text("Passcode Theming")) {
