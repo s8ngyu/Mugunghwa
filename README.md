@@ -6,6 +6,7 @@ Features:
  - Passcode theming
 
 Upcoming:
+ - Icon Theming
  - Carrier Changer
 
 and more to come :)
