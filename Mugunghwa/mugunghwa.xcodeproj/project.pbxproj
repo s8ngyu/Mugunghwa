@@ -26,6 +26,7 @@
 		8B0B9DC328D6AF0E00FFAB36 /* MGPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGPreferences.h; sourceTree = "<group>"; };
 		8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGPreferences.m; sourceTree = "<group>"; };
 		8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeThemeView.swift; sourceTree = "<group>"; };
+		8B23FAE328EC73740026617F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BC10E1428D4FE36005265FE /* mugunghwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mugunghwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mugunghwaApp.swift; sourceTree = "<group>"; };
 		8BC10E1928D4FE36005265FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		8BC10E1628D4FE36005265FE /* mugunghwa */ = {
 			isa = PBXGroup;
 			children = (
+				8B23FAE328EC73740026617F /* Info.plist */,
 				8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */,
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
 				8BC10E2528D509E4005265FE /* HomeView.swift */,
@@ -307,6 +309,7 @@
 				DEVELOPMENT_TEAM = GK39GPB6KU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mugunghwa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mugunghwa;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -346,6 +349,7 @@
 				DEVELOPMENT_TEAM = GK39GPB6KU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mugunghwa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mugunghwa;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
