@@ -4,6 +4,8 @@
 <dict>
 	<key>platform-application</key>
 	<true/>
+	<key>application-identifier</key>
+	<string>me.soongyu.mugunghwautil</string>
 	<key>com.apple.security.exception.files.absolute-path.read-write</key>
 	<array>
 		<string>/</string>
@@ -12,6 +14,10 @@
 	<true/>
 	<key>com.apple.private.persona-mgmt</key>
 	<true/>
+	<key>TSRootBinaries</key>
+	<array>
+		<string>mugunghwahelper</string>
+	</array>
 	<key>com.apple.private.MobileContainerManager.allowed</key>
 	<true/>
 	<key>com.apple.private.security.container-manager</key>

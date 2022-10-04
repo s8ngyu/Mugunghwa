@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface SBApplication : NSObject
+
+@end
+
 @interface ObjcHelper : NSObject
 -(id)init;
 -(NSNumber *)getDeviceSubType;

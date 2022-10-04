@@ -11,7 +11,7 @@ mkdir build
 
 cd build
 
-xcodebuild -project "$WORKING_LOCATION/$APPLICATION_NAME.xcodeproj" \
+xcodebuild -project "$WORKING_LOCATION/Mugunghwa/$APPLICATION_NAME.xcodeproj" \
     -scheme "$APPLICATION_NAME" \
     -configuration Release \
     -derivedDataPath "$WORKING_LOCATION/build/DerivedDataApp" \
@@ -32,7 +32,7 @@ if [ -e "$TARGET_APP/embedded.mobileprovision" ]; then
     rm -rf "$TARGET_APP/embedded.mobileprovision"
 fi
 
-ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
+ldid -S"$WORKING_LOCATION/Mugunghwa/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
 mkdir Payload
 cp -r Mugunghwa.app Payload/Mugunghwa.app
 zip -vr Mugunghwa.tipa Payload

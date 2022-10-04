@@ -214,7 +214,9 @@ struct UtilityView: View {
                         applyHomeGuesture(homeGesture)
                         showingAlert.toggle()
                     }.disabled(homeGestureButtonDisabled(homeGesture))
+                }.onAppear() {
                 }
+                
             }
             .navigationTitle("Utilities")
         }
