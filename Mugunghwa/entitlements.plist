@@ -30,5 +30,7 @@
 	</array>
 	<key>com.apple.private.security.storage.Photos</key>
 	<true/>
+	<key>com.apple.security.personal-information.photos-library</key>
+	<true/>
 </dict>
 </plist>
