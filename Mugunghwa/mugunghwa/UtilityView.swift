@@ -113,11 +113,11 @@ func applyHomeGuesture(_ enabled: Bool) {
 func checkAndCreateBackupFolder() {
     let fileManager = FileManager.default
     if !fileManager.fileExists(atPath: "/private/var/mobile/mugunghwa/") {
-        do {
-            try fileManager.createDirectory(atPath: "/private/var/mobile/mugunghwa", withIntermediateDirectories: true)
-        } catch {
-            print(error)
-        }
+        try? fileManager.createDirectory(atPath: "/private/var/mobile/mugunghwa", withIntermediateDirectories: true)
+    }
+    
+    if !fileManager.fileExists(atPath: "/private/var/mobile/mugunghwa/Themes") {
+        try? fileManager.createDirectory(atPath: "/private/var/mobile/mugunghwa/Themes", withIntermediateDirectories: true)
     }
 }
 
@@ -200,7 +200,7 @@ struct UtilityView: View {
                                 }
                             ),
                             secondaryButton: .cancel(
-                                Text("Respring Later"),
+                                Text("Not Now"),
                                 action: {}
                             )
                         )
@@ -224,6 +224,7 @@ struct UtilityView: View {
                     }).disabled(checkSandbox())
                 }
             }
+            .listStyle(.insetGrouped)
             .navigationTitle("Utilities")
         }
     }
