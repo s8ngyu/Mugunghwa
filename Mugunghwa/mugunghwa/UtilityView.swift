@@ -223,6 +223,12 @@ struct UtilityView: View {
                         Text("Configuration")
                     }).disabled(checkSandbox())
                 }
+                
+                Section(header: Text("Icon Theming")) {
+                    NavigationLink(destination: ThemesManageView(), label: {
+                        Text("Manage Themes")
+                    }).disabled(checkSandbox())
+                }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Utilities")

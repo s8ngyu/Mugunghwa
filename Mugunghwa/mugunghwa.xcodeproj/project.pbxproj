@@ -11,6 +11,8 @@
 		8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */; };
 		8B10987F28D7192200732734 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B10987E28D7192200732734 /* Alamofire */; };
 		8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */; };
+		8B51771628F6CE6B00860772 /* ThemesManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51771528F6CE6B00860772 /* ThemesManageView.swift */; };
+		8B51771C28F8493100860772 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51771B28F8493100860772 /* ZipArchive */; };
 		8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */; };
 		8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1928D4FE36005265FE /* ContentView.swift */; };
 		8BC10E1C28D4FE37005265FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC10E1B28D4FE37005265FE /* Assets.xcassets */; };
@@ -27,6 +29,7 @@
 		8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGPreferences.m; sourceTree = "<group>"; };
 		8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeThemeView.swift; sourceTree = "<group>"; };
 		8B23FAE328EC73740026617F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8B51771528F6CE6B00860772 /* ThemesManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesManageView.swift; sourceTree = "<group>"; };
 		8BC10E1428D4FE36005265FE /* mugunghwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mugunghwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mugunghwaApp.swift; sourceTree = "<group>"; };
 		8BC10E1928D4FE36005265FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B10987F28D7192200732734 /* Alamofire in Frameworks */,
+				8B51771C28F8493100860772 /* ZipArchive in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +76,7 @@
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
 				8BC10E2528D509E4005265FE /* HomeView.swift */,
 				8BC10E2728D5148B005265FE /* UtilityView.swift */,
+				8B51771528F6CE6B00860772 /* ThemesManageView.swift */,
 				8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */,
 				8BC10E1B28D4FE37005265FE /* Assets.xcassets */,
 				8BC10E1D28D4FE37005265FE /* Preview Content */,
@@ -110,6 +115,7 @@
 			name = mugunghwa;
 			packageProductDependencies = (
 				8B10987E28D7192200732734 /* Alamofire */,
+				8B51771B28F8493100860772 /* ZipArchive */,
 			);
 			productName = mugunghwa;
 			productReference = 8BC10E1428D4FE36005265FE /* mugunghwa.app */;
@@ -142,6 +148,7 @@
 			mainGroup = 8BC10E0B28D4FE36005265FE;
 			packageReferences = (
 				8B10987D28D7192200732734 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8B51771A28F8493100860772 /* XCRemoteSwiftPackageReference "ZipArchive" */,
 			);
 			productRefGroup = 8BC10E1528D4FE36005265FE /* Products */;
 			projectDirPath = "";
@@ -172,6 +179,7 @@
 				8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */,
 				8BC10E2628D509E4005265FE /* HomeView.swift in Sources */,
 				8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */,
+				8B51771628F6CE6B00860772 /* ThemesManageView.swift in Sources */,
 				8B0B9DC028D606A900FFAB36 /* ObjcHelper.m in Sources */,
 				8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */,
 				8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */,
@@ -407,6 +415,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		8B51771A28F8493100860772 /* XCRemoteSwiftPackageReference "ZipArchive" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ZipArchive/ZipArchive.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -414,6 +430,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B10987D28D7192200732734 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		8B51771B28F8493100860772 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B51771A28F8493100860772 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
