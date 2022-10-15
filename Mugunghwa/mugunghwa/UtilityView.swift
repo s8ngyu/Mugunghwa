@@ -167,15 +167,54 @@ func homeGestureButtonDisabled(_ enabled: Bool) -> Bool {
         return true
     }
     
-    
     return false
 }
 
+// MARK: - Theme
+func getThemesList() -> [String] {
+    checkAndCreateBackupFolder()
+    
+    var tmp = ["Default"]
+    
+    let list = getList(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
+    for e in list {
+        tmp.append(e.lastPathComponent)
+    }
+    
+    return tmp
+}
+
+func getThemeSelection() -> Int {
+    let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
+    let tmp = prefs.dictionary["selectedTheme"]
+    
+    var selected = ""
+    if (tmp != nil) {
+        selected = prefs.dictionary["selectedTheme"] as! String
+    }
+    
+    if (selected == "Mugunghwa/Default") {
+        return 0
+    }
+    
+    if (selected != "") {
+        let selectedInInt = getThemesList().firstIndex(of: selected)
+        if (selectedInInt != nil) {
+            return selectedInInt!
+        } else {
+            return 0
+        }
+    }
+    
+    return 0
+}
 // MARK: - SwiftUI
 struct UtilityView: View {
     @State private var dotColour = Color.red
     @State private var homeGesture = getCurrentState()
     @State private var showingAlert = false
+    @State private var selectedTheme = getThemeSelection()
+    @State private var themesList = getThemesList()
     
     var body: some View {
         NavigationView {
@@ -225,6 +264,18 @@ struct UtilityView: View {
                 }
                 
                 Section(header: Text("Icon Theming")) {
+                    Picker("Selected Theme", selection: $selectedTheme) {
+                        ForEach(0..<themesList.count, id: \.self) { num in
+                            Text("\(themesList[num])").tag(num)
+                        }
+                    }.onChange(of: selectedTheme) { tag in
+                        let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
+                        prefs.dictionary.setValue(themesList[tag], forKey: "selectedTheme")
+                        if tag == 0 {
+                            prefs.dictionary.setValue("Mugunghwa/Default", forKey: "selectedTheme")
+                        }
+                        prefs.updatePlist()
+                    }
                     NavigationLink(destination: ThemesManageView(), label: {
                         Text("Manage Themes")
                     }).disabled(checkSandbox())
