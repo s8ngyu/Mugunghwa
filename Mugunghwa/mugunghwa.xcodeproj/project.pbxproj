@@ -18,6 +18,9 @@
 		8B51772D28FBA90300860772 /* BundleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772C28FBA90300860772 /* BundleExt.swift */; };
 		8B51772F28FBA92800860772 /* CoreUI_Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772E28FBA92800860772 /* CoreUI_Reference.swift */; };
 		8B51773128FBA94200860772 /* Rendition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51773028FBA94200860772 /* Rendition.swift */; };
+		8B51773828FBB70200860772 /* CoreUI.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B51773728FBB70200860772 /* CoreUI.tbd */; };
+		8B51773A28FBB70F00860772 /* CoreUI-Simulator.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B51773928FBB70F00860772 /* CoreUI-Simulator.tbd */; };
+		8B51773C28FBB71D00860772 /* CoreUI-Mac.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B51773B28FBB71D00860772 /* CoreUI-Mac.tbd */; };
 		8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */; };
 		8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1928D4FE36005265FE /* ContentView.swift */; };
 		8BC10E1C28D4FE37005265FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC10E1B28D4FE37005265FE /* Assets.xcassets */; };
@@ -49,6 +52,9 @@
 		8B51772C28FBA90300860772 /* BundleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExt.swift; sourceTree = "<group>"; };
 		8B51772E28FBA92800860772 /* CoreUI_Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreUI_Reference.swift; sourceTree = "<group>"; };
 		8B51773028FBA94200860772 /* Rendition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rendition.swift; sourceTree = "<group>"; };
+		8B51773728FBB70200860772 /* CoreUI.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = CoreUI.tbd; path = mugunghwa/PrivateFrameworks/CoreUI.tbd; sourceTree = "<group>"; };
+		8B51773928FBB70F00860772 /* CoreUI-Simulator.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "CoreUI-Simulator.tbd"; path = "mugunghwa/PrivateFrameworks/CoreUI-Simulator.tbd"; sourceTree = "<group>"; };
+		8B51773B28FBB71D00860772 /* CoreUI-Mac.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "CoreUI-Mac.tbd"; path = "mugunghwa/PrivateFrameworks/CoreUI-Mac.tbd"; sourceTree = "<group>"; };
 		8BC10E1428D4FE36005265FE /* mugunghwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mugunghwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mugunghwaApp.swift; sourceTree = "<group>"; };
 		8BC10E1928D4FE36005265FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B51773C28FBB71D00860772 /* CoreUI-Mac.tbd in Frameworks */,
+				8B51773A28FBB70F00860772 /* CoreUI-Simulator.tbd in Frameworks */,
+				8B51773828FBB70200860772 /* CoreUI.tbd in Frameworks */,
 				8B10987F28D7192200732734 /* Alamofire in Frameworks */,
 				8B51771C28F8493100860772 /* ZipArchive in Frameworks */,
 			);
@@ -87,11 +96,22 @@
 			path = AssetsHeaders;
 			sourceTree = "<group>";
 		};
+		8B51773628FBB70200860772 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B51773B28FBB71D00860772 /* CoreUI-Mac.tbd */,
+				8B51773928FBB70F00860772 /* CoreUI-Simulator.tbd */,
+				8B51773728FBB70200860772 /* CoreUI.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8BC10E0B28D4FE36005265FE = {
 			isa = PBXGroup;
 			children = (
 				8BC10E1628D4FE36005265FE /* mugunghwa */,
 				8BC10E1528D4FE36005265FE /* Products */,
+				8B51773628FBB70200860772 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -376,6 +396,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mugunghwa/PrivateFrameworks",
+				);
 				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -415,6 +439,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mugunghwa/PrivateFrameworks",
 				);
 				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
