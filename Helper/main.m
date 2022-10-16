@@ -14,7 +14,14 @@ int main(int argc, char *argv[], char *envp[]) {
 
 		int ret = 0;
 
+		NSString *cmd = [NSString stringWithUTF8String: argv[1]];
+        NSLog(@"%@ %d", cmd, argc);
 
+        if ([cmd isEqualToString:@"cp"]) {
+            if (argc <= 3) return -3;
+            NSString *at = [NSString stringWithUTF8String:argv[2]];
+            NSString *to = [NSString stringWithUTF8String:argv[3]];
+            [[NSFileManager defaultManager] copyItemAtPath:at toPath:to error:nil];
         }
 
         return ret;

@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(UIImage *)getImageFromData:(NSString *)path;
 -(void)saveImage:(UIImage *)image atPath:(NSString *)path;
 -(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path;
+-(void)copyWithRootAt:(NSString *)path to:(NSString *)toCopy;
 @end
 
 NS_ASSUME_NONNULL_END

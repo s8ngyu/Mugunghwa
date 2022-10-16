@@ -60,6 +60,10 @@
     return [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mugunghwahelper"];
 }
 
+-(void)copyWithRootAt:(NSString *)path to:(NSString *)toCopy {
+    spawnRoot(helperPath, @[@"cp", path, toCopy], nil, nil);
+}
+
 -(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path {
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile: path];
     

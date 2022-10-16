@@ -82,6 +82,12 @@ extension AppBundle {
         
         bundlePath = getListOfDirectories(atPath: path!).first!
         
+        // create bak.assets if it doesn't exist
+        let fileManager = FileManager.default
+        
+        if (fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("Assets.car").path) && !fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("bak.car").path)) {
+            helper.copyWithRoot(at: bundlePath!.appendingPathComponent("Assets.car").path, to: bundlePath!.appendingPathComponent("bak.car").path)
+        }
     }
 }
 
