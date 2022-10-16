@@ -223,6 +223,40 @@ func getBundles() -> [AppBundle] {
 
 func applyTheme(selection: Int) {
     let bundleList = getBundles()
+    let helper = ObjcHelper.init()
+    
+    if selection == 0 {
+        // revert to Default
+        for bundle in bundleList {
+            if FileManager.default.fileExists(atPath: bundle.bundlePath!.appendingPathComponent("bak.car").path) {
+                helper.moveWithRoot(at: bundle.bundlePath!.appendingPathComponent("bak.car").path, to: bundle.bundlePath!.appendingPathComponent("Assets.car").path)
+            }
+        }
+    } else {
+        // load theme
+        let theme = Theme.init(withPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!.appendingPathComponent(getThemesList()[selection]))
+        
+        for bundle in bundleList {
+            // continue if theme for this bundle exists
+            let themeImage = theme.getIcon(bundleIdentifier: bundle.bundleIdentifier)
+            if (themeImage != nil) {
+                // modify Assets.car
+                var catalog = AssetCatalog(filePath: bundle.bundlePath!.appendingPathComponent("Assets.car").path)
+                carPathLookup = bundle.bundlePath!.appendingPathComponent("Assets.car").path
+                
+                for rendition in catalog.renditions {
+                    if (rendition.assetType == "Icon") {
+                        rendition.saveEditedImage(themeImage!.imageResized(to: rendition.image!.size))
+                    }
+                }
+                
+                // recompile
+                catalog.recompile()
+                
+                helper.moveWithRoot(at: docURL.appendingPathComponent(catalog.carID).appendingPathComponent("Assets.car").path, to: bundle.bundlePath!.appendingPathComponent("Assets.car").path)
+            }
+        }
+    }
 }
 
 
