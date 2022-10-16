@@ -7,7 +7,7 @@
 
 import SwiftUI
 public var docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-public var carPathLookup: [String:String] = [:]
+public var carPathLookup = ""
 public var newCarPath = URL(string: "")
 class AssetCatalog: Codable, Hashable, Identifiable {
     
@@ -169,8 +169,9 @@ extension AssetCatalog {
         if !fm.fileExists(atPath: carFolder.path) {
             try? fm.createDirectory(at: carFolder, withIntermediateDirectories: true, attributes: nil)
         }
-        let sourceCAR = carPathLookup[carID]!
+        let sourceCAR = carPathLookup
         let newCAR = carFolder.appendingPathComponent("Assets.car").path
+        NSLog("mugunghwaconsole \(newCAR)")
         newCarPath = URL(string: newCAR)
         try? fm.removeItem(atPath: newCAR)
         try? fm.copyItem(atPath: sourceCAR, toPath: newCAR)

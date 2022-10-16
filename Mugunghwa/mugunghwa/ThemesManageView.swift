@@ -37,14 +37,18 @@ extension Theme {
     }
     
     func getIcon(bundleIdentifier: String) -> UIImage? {
-        var data = try? Data(contentsOf: path!.appendingPathComponent("\(bundleIdentifier)-large.png"))
-        if data == nil {
-            data = try? Data(contentsOf: path!.appendingPathComponent("\(bundleIdentifier)@3x.png"))
-        }
-        if data == nil {
-            data = try? Data(contentsOf: path!.appendingPathComponent("\(bundleIdentifier)@2x.png"))
-        }
-        if data == nil {
+        let helper = ObjcHelper.init()
+        let fileManager = FileManager.default
+        
+        var data: Data?
+        
+        if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)-large.png").path) {
+            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)-large.png").path)
+        } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)@3x.png").path) {
+            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)@3x.png").path)
+        } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)@2x.png").path) {
+            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)@2x.png").path)
+        } else {
             return nil
         }
         
@@ -204,7 +208,7 @@ struct ThemeRow: View {
                     IconView(image: theme.getIcon(bundleIdentifier: "com.apple.compass"))
                     IconView(image: theme.getIcon(bundleIdentifier: "com.apple.Maps"))
                     IconView(image: theme.getIcon(bundleIdentifier: "com.apple.news"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.podcasts"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.measure"))
                 }
             }
         }

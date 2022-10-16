@@ -174,12 +174,10 @@ extension Rendition {
     var image: UIImage? {
         get {
             print("printing car id and car path lookup")
-            print(carID)
-            print(carPathLookup[carID])
-            if let themeStore = CUIStructuredThemeStore(path: carPathLookup[carID]!) {
+            if let themeStore = CUIStructuredThemeStore(path: carPathLookup) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     if assetType == "Vector" {
-                        if let catalog = try? CUICatalog(url: URL(fileURLWithPath: carPathLookup[carID]!)),
+                        if let catalog = try? CUICatalog(url: URL(fileURLWithPath: carPathLookup)),
                             let namedVector = CUINamedVectorGlyph(name: assetName, using: CUIRenditionKey(keyList: keyList), fromTheme: catalog.storageRef), //can we get storeref via other means?
                             let svgData = cuiRendition.value(forKey: "rawData") as? Data,
                             let svgString = String(data: svgData, encoding: .utf8),
@@ -248,11 +246,11 @@ extension Rendition {
     
     var previewImage: UIImage? {
         get {
-            if let themeStore = CUIStructuredThemeStore(path: carPathLookup[carID]!) {
+            if let themeStore = CUIStructuredThemeStore(path: carPathLookup) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     let rect = CGRect(x: 0, y: 0, width: 72, height: 72) //preview grid size
                     if assetType == "Vector" {
-                        if let catalog = try? CUICatalog(url: URL(fileURLWithPath: carPathLookup[carID]!)),
+                        if let catalog = try? CUICatalog(url: URL(fileURLWithPath: carPathLookup)),
                             let namedVector = CUINamedVectorGlyph(name: assetName, using: CUIRenditionKey(keyList: keyList), fromTheme: catalog.storageRef), //can we get storeref via other means?
                             let svgData = cuiRendition.value(forKey: "rawData") as? Data,
                             let svgString = String(data: svgData, encoding: .utf8),
@@ -354,7 +352,7 @@ extension Rendition {
                 }
             }
         } else if (assetType == "PDF" || assetType == "Vector" || assetType == "Raw Data") {
-            if let themeStore = CUIStructuredThemeStore(path: carPathLookup[carID]!) {
+            if let themeStore = CUIStructuredThemeStore(path: carPathLookup) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     if assetType == "PDF" {
                         let data = cuiRendition.srcData
