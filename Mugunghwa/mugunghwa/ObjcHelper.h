@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path;
 -(void)copyWithRootAt:(NSString *)at to:(NSString *)to;
 -(void)moveWithRootAt:(NSString *)at to:(NSString *)to;
+-(NSData *)dataForImageAt:(NSString *)path;
 @end
 
 NS_ASSUME_NONNULL_END

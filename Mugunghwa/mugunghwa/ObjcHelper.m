@@ -74,6 +74,13 @@
     return plistDict;
 }
 
+-(NSData *)dataForImageAt:(NSString *)path {
+    NSError *error;
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    return data;
+}
+
 // MARK: - TSUtil
 NSString* getNSStringFromFile(int fd)
 {
