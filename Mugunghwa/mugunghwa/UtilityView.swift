@@ -208,6 +208,24 @@ func getThemeSelection() -> Int {
     
     return 0
 }
+
+func getBundles() -> [AppBundle] {
+    var tmp = [AppBundle]()
+    let tmpBundleList = getList(atPath: URL(string: "/private/var/containers/Bundle/Application")!)
+    
+    for e in tmpBundleList {
+        let bundle = AppBundle.init(withPath: e)
+        tmp.append(bundle)
+    }
+    
+    return tmp
+}
+
+func applyTheme(selection: Int) {
+    let bundleList = getBundles()
+}
+
+
 // MARK: - SwiftUI
 struct UtilityView: View {
     @State private var dotColour = Color.red
@@ -277,6 +295,9 @@ struct UtilityView: View {
                     NavigationLink(destination: ThemesManageView(), label: {
                         Text("Manage Themes")
                     }).disabled(checkSandbox())
+                    Button("Apply") {
+                        applyTheme(selection: selectedTheme)
+                    }
                 }
             }
             .listStyle(.insetGrouped)

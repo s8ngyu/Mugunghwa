@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)respring;
 -(UIImage *)getImageFromData:(NSString *)path;
 -(void)saveImage:(UIImage *)image atPath:(NSString *)path;
+-(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path;
 @end
 
 NS_ASSUME_NONNULL_END

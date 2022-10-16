@@ -54,7 +54,54 @@ extension Theme {
     }
 }
 
-func getListOfDirectories(atPath: URL) -> [Theme] {
+class AppBundle: Identifiable {
+    var id: String
+    var path: URL?
+    var bundlePath: URL?
+    var bundleIdentifier: String
+    
+    init() {
+        self.id = ""
+        self.path = nil
+        self.bundlePath = nil
+        self.bundleIdentifier = ""
+    }
+}
+
+extension AppBundle {
+    convenience init(withPath: URL) {
+        self.init()
+        
+        // init
+        id = withPath.lastPathComponent
+        path = withPath
+        
+        let helper = ObjcHelper.init()
+        let metadata = helper.getDictionaryOfPlist(atPath: withPath.appendingPathComponent(".com.apple.mobile_container_manager.metadata.plist").path) as! Dictionary<String,Any>
+        bundleIdentifier = metadata["MCMMetadataIdentifier"] as! String
+        
+        bundlePath = getListOfDirectories(atPath: path!).first!
+        
+    }
+}
+
+func getListOfDirectories(atPath: URL) -> [URL] {
+    var tmp = [URL]()
+    
+    do {
+        let dir: [URL] = try FileManager.default.contentsOfDirectory(at: atPath, includingPropertiesForKeys: nil)
+        for f in dir {
+            if f.isDirectory {
+                tmp.append(f)
+            }
+        }
+        return tmp
+    } catch {
+        return tmp
+    }
+}
+
+func getListOfThemes(atPath: URL) -> [Theme] {
     var tmp: [Theme] = [Theme]()
     
     do {
@@ -86,7 +133,7 @@ func getList(atPath: URL) -> [URL] {
 }
 
 struct ThemesManageView: View {
-    @State private var themes: [Theme] = getListOfDirectories(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
+    @State private var themes: [Theme] = getListOfThemes(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
     
     var body: some View {
         List {
@@ -97,7 +144,7 @@ struct ThemesManageView: View {
         }.navigationTitle("Manage Themes")
             .listStyle(.insetGrouped)
             .onAppear() {
-                themes = getListOfDirectories(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
+                themes = getListOfThemes(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
             }
             .toolbar {
                 EditButton()

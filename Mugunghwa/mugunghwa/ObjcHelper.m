@@ -60,6 +60,10 @@
     return [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mugunghwahelper"];
 }
 
+-(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path {
+    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile: path];
+    
+    return plistDict;
 }
 
 // MARK: - TSUtil
