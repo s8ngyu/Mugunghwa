@@ -37,6 +37,11 @@ extension Backport {
 
 func getPath() -> String {
     let fileManager = FileManager.default
+   
+    if fileManager.fileExists(atPath: "/private/var/mobile/Library/Caches/TelephonyUI-8") {
+        return "/private/var/mobile/Library/Caches/TelephonyUI-8"
+    }
+    
     let path = "/private/var/mobile/Library/Caches/"
     do {
         let paths = try fileManager.contentsOfDirectory(at: URL(string: path)!, includingPropertiesForKeys: nil)
