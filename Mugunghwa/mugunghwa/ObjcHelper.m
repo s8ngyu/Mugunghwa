@@ -60,8 +60,6 @@
     return [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mugunghwahelper"];
 }
 
--(void)testAppIcon {
-    spawnRoot(helperPath, @[@"test", @"blahblah"], nil, nil);
 }
 
 // MARK: - TSUtil
