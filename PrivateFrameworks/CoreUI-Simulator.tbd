@@ -1,0 +1,10 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+platform:        ios
+install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/CoreUI'
+current-version: 609.4
+exports:         
+  - archs:           [ x86_64 ]
+    objc-classes:    [ CSIBitmapWrapper, CSIGenerator, CUICatalog, CUICommonAssetStorage, CUIMutableCommonAssetStorage,
+                       CUINamedLookup, CUINamedVectorGlyph, CUIRenditionKey, CUIStructuredThemeStore, CUIThemeRendition ]
+...
