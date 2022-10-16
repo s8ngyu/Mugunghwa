@@ -279,7 +279,7 @@ struct UtilityView: View {
                     }).disabled(checkSandbox())
                 }
                 
-                Section(header: Text("Icon Theming")) {
+                Section(header: Text("Icon Theming"), footer: Text("Place icon images at /var/mobile/mugunghwa/Themes/(theme name)/\nYou can also import iconpack from Havoc by sharing it to Mugunghwa")) {
                     Picker("Selected Theme", selection: $selectedTheme) {
                         ForEach(0..<themesList.count, id: \.self) { num in
                             Text("\(themesList[num])").tag(num)
