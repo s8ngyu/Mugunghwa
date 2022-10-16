@@ -60,8 +60,12 @@
     return [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mugunghwahelper"];
 }
 
--(void)copyWithRootAt:(NSString *)path to:(NSString *)toCopy {
-    spawnRoot(helperPath, @[@"cp", path, toCopy], nil, nil);
+-(void)copyWithRootAt:(NSString *)at to:(NSString *)to {
+    spawnRoot(helperPath, @[@"cp", at, to], nil, nil);
+}
+
+-(void)moveWithRootAt:(NSString *)at to:(NSString *)to {
+    spawnRoot(helperPath, @[@"mv", at, to], nil, nil);
 }
 
 -(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path {
