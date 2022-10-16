@@ -13,6 +13,11 @@
 		8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */; };
 		8B51771628F6CE6B00860772 /* ThemesManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51771528F6CE6B00860772 /* ThemesManageView.swift */; };
 		8B51771C28F8493100860772 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51771B28F8493100860772 /* ZipArchive */; };
+		8B51772928FBA7EC00860772 /* AssetCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772828FBA7EC00860772 /* AssetCatalog.swift */; };
+		8B51772B28FBA8ED00860772 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772A28FBA8ED00860772 /* Attributes.swift */; };
+		8B51772D28FBA90300860772 /* BundleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772C28FBA90300860772 /* BundleExt.swift */; };
+		8B51772F28FBA92800860772 /* CoreUI_Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772E28FBA92800860772 /* CoreUI_Reference.swift */; };
+		8B51773128FBA94200860772 /* Rendition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51773028FBA94200860772 /* Rendition.swift */; };
 		8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */; };
 		8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E1928D4FE36005265FE /* ContentView.swift */; };
 		8BC10E1C28D4FE37005265FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC10E1B28D4FE37005265FE /* Assets.xcassets */; };
@@ -30,6 +35,20 @@
 		8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeThemeView.swift; sourceTree = "<group>"; };
 		8B23FAE328EC73740026617F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8B51771528F6CE6B00860772 /* ThemesManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesManageView.swift; sourceTree = "<group>"; };
+		8B51771E28FBA63000860772 /* CSIBitmapWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIBitmapWrapper.h; sourceTree = "<group>"; };
+		8B51771F28FBA64900860772 /* CSIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIGenerator.h; sourceTree = "<group>"; };
+		8B51772028FBA65B00860772 /* CUICatalog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUICatalog.h; sourceTree = "<group>"; };
+		8B51772228FBA68500860772 /* CUICommonAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUICommonAssetStorage.h; sourceTree = "<group>"; };
+		8B51772328FBA69C00860772 /* CUINamedLookup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUINamedLookup.h; sourceTree = "<group>"; };
+		8B51772428FBA6BB00860772 /* CUIRenditionKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUIRenditionKey.h; sourceTree = "<group>"; };
+		8B51772528FBA74600860772 /* CUIStructuredThemeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUIStructuredThemeStore.h; sourceTree = "<group>"; };
+		8B51772628FBA75900860772 /* CUIStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUIStructures.h; sourceTree = "<group>"; };
+		8B51772728FBA77D00860772 /* CUIThemeRendition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUIThemeRendition.h; sourceTree = "<group>"; };
+		8B51772828FBA7EC00860772 /* AssetCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalog.swift; sourceTree = "<group>"; };
+		8B51772A28FBA8ED00860772 /* Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
+		8B51772C28FBA90300860772 /* BundleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExt.swift; sourceTree = "<group>"; };
+		8B51772E28FBA92800860772 /* CoreUI_Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreUI_Reference.swift; sourceTree = "<group>"; };
+		8B51773028FBA94200860772 /* Rendition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rendition.swift; sourceTree = "<group>"; };
 		8BC10E1428D4FE36005265FE /* mugunghwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mugunghwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mugunghwaApp.swift; sourceTree = "<group>"; };
 		8BC10E1928D4FE36005265FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +71,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B51771D28FBA61500860772 /* AssetsHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				8B51771E28FBA63000860772 /* CSIBitmapWrapper.h */,
+				8B51771F28FBA64900860772 /* CSIGenerator.h */,
+				8B51772028FBA65B00860772 /* CUICatalog.h */,
+				8B51772228FBA68500860772 /* CUICommonAssetStorage.h */,
+				8B51772328FBA69C00860772 /* CUINamedLookup.h */,
+				8B51772428FBA6BB00860772 /* CUIRenditionKey.h */,
+				8B51772528FBA74600860772 /* CUIStructuredThemeStore.h */,
+				8B51772628FBA75900860772 /* CUIStructures.h */,
+				8B51772728FBA77D00860772 /* CUIThemeRendition.h */,
+			);
+			path = AssetsHeaders;
+			sourceTree = "<group>";
+		};
 		8BC10E0B28D4FE36005265FE = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +109,11 @@
 				8B23FAE328EC73740026617F /* Info.plist */,
 				8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */,
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
+				8B51772828FBA7EC00860772 /* AssetCatalog.swift */,
+				8B51772A28FBA8ED00860772 /* Attributes.swift */,
+				8B51772C28FBA90300860772 /* BundleExt.swift */,
+				8B51772E28FBA92800860772 /* CoreUI_Reference.swift */,
+				8B51773028FBA94200860772 /* Rendition.swift */,
 				8BC10E2528D509E4005265FE /* HomeView.swift */,
 				8BC10E2728D5148B005265FE /* UtilityView.swift */,
 				8B51771528F6CE6B00860772 /* ThemesManageView.swift */,
@@ -85,6 +125,7 @@
 				8B0B9DC328D6AF0E00FFAB36 /* MGPreferences.h */,
 				8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */,
 				8B0B9DBD28D606A800FFAB36 /* mugunghwa-Bridging-Header.h */,
+				8B51771D28FBA61500860772 /* AssetsHeaders */,
 			);
 			path = mugunghwa;
 			sourceTree = "<group>";
@@ -176,14 +217,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B51773128FBA94200860772 /* Rendition.swift in Sources */,
 				8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */,
 				8BC10E2628D509E4005265FE /* HomeView.swift in Sources */,
 				8BC10E1A28D4FE36005265FE /* ContentView.swift in Sources */,
 				8B51771628F6CE6B00860772 /* ThemesManageView.swift in Sources */,
 				8B0B9DC028D606A900FFAB36 /* ObjcHelper.m in Sources */,
+				8B51772D28FBA90300860772 /* BundleExt.swift in Sources */,
+				8B51772F28FBA92800860772 /* CoreUI_Reference.swift in Sources */,
 				8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */,
 				8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */,
 				8BC10E2828D5148B005265FE /* UtilityView.swift in Sources */,
+				8B51772B28FBA8ED00860772 /* Attributes.swift in Sources */,
+				8B51772928FBA7EC00860772 /* AssetCatalog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +376,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -370,7 +416,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
