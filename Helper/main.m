@@ -17,16 +17,17 @@ int main(int argc, char *argv[], char *envp[]) {
 		NSString *cmd = [NSString stringWithUTF8String: argv[1]];
         NSLog(@"%@ %d", cmd, argc);
 
-        if ([cmd isEqualToString:@"cp"]) {
+        if ([cmd isEqualToString: @"cp"]) {
             if (argc <= 3) return -3;
-            NSString *at = [NSString stringWithUTF8String:argv[2]];
-            NSString *to = [NSString stringWithUTF8String:argv[3]];
-            [[NSFileManager defaultManager] copyItemAtPath:at toPath:to error:nil];
-        } else if ([cmd isEqualToString:@"mv"]) {
+            NSString *at = [NSString stringWithUTF8String: argv[2]];
+            NSString *to = [NSString stringWithUTF8String: argv[3]];
+            [[NSFileManager defaultManager] copyItemAtPath: at toPath: to error:nil];
+        } else if ([cmd isEqualToString: @"mv"]) {
             if (argc <= 3) return -3;
-            NSString *at = [NSString stringWithUTF8String:argv[2]];
-            NSString *to = [NSString stringWithUTF8String:argv[3]];
-            [[NSFileManager defaultManager] moveItemAtPath:at toPath:to error:nil];
+            NSString *at = [NSString stringWithUTF8String: argv[2]];
+            NSString *to = [NSString stringWithUTF8String: argv[3]];
+            [[NSFileManager defaultManager] removeItemAtPath: to error: nil];
+            [[NSFileManager defaultManager] moveItemAtPath: at toPath: to error:nil];
         }
 
         return ret;
