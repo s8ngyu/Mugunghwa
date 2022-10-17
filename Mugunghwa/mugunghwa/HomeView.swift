@@ -16,10 +16,10 @@ func version() -> String {
 
 func checkSandbox() -> Bool {
     let fileManager = FileManager.default
-    fileManager.createFile(atPath: "/var/mobile/me.soongyu.red-dot", contents: nil)
-    if fileManager.fileExists(atPath: "/var/mobile/me.soongyu.red-dot") {
+    fileManager.createFile(atPath: "/var/mobile/me.soongyu.mugunghwa", contents: nil)
+    if fileManager.fileExists(atPath: "/var/mobile/me.soongyu.mugunghwa") {
         do {
-            try fileManager.removeItem(atPath: "/var/mobile/me.soongyu.red-dot")
+            try fileManager.removeItem(atPath: "/var/mobile/me.soongyu.mugunghwa")
         } catch {
             print("Failed to remove sandbox check file")
         }
