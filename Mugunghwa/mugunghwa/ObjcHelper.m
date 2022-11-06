@@ -7,6 +7,11 @@
 
 #import "ObjcHelper.h"
 
+#define POSIX_SPAWN_PERSONA_FLAGS_OVERRIDE 1
+extern int posix_spawnattr_set_persona_np(const posix_spawnattr_t* __restrict, uid_t, uint32_t);
+extern int posix_spawnattr_set_persona_uid_np(const posix_spawnattr_t* __restrict, uid_t);
+extern int posix_spawnattr_set_persona_gid_np(const posix_spawnattr_t* __restrict, uid_t);
+
 @implementation ObjcHelper
 
 -(id)init {
@@ -61,11 +66,11 @@
 }
 
 -(void)copyWithRootAt:(NSString *)at to:(NSString *)to {
-    spawnRoot(helperPath, @[@"cp", at, to], nil, nil);
+    spawnRoot(helperPath, @[@"cp", at, to]);
 }
 
 -(void)moveWithRootAt:(NSString *)at to:(NSString *)to {
-    spawnRoot(helperPath, @[@"mv", at, to], nil, nil);
+    spawnRoot(helperPath, @[@"mv", at, to]);
 }
 
 -(NSMutableDictionary *)getDictionaryOfPlistAtPath:(NSString *)path {
@@ -81,20 +86,9 @@
     return data;
 }
 
-// MARK: - TSUtil
-NSString* getNSStringFromFile(int fd)
-{
-    NSMutableString* ms = [NSMutableString new];
-    ssize_t num_read;
-    char c;
-    while((num_read = read(fd, &c, sizeof(c))))
-    {
-        [ms appendString:[NSString stringWithFormat:@"%c", c]];
-    }
-    return ms.copy;
-}
+// MARK: - TSUtild
 
-int spawnRoot(NSString* path, NSArray* args, NSString** stdOut, NSString** stdErr)
+int spawnRoot(NSString* path, NSArray* args)
 {
     NSMutableArray* argsM = args.mutableCopy ?: [NSMutableArray new];
     [argsM insertObject:path.lastPathComponent atIndex:0];
@@ -117,22 +111,6 @@ int spawnRoot(NSString* path, NSArray* args, NSString** stdOut, NSString** stdEr
 
     posix_spawn_file_actions_t action;
     posix_spawn_file_actions_init(&action);
-
-    int outErr[2];
-    if(stdErr)
-    {
-        pipe(outErr);
-        posix_spawn_file_actions_adddup2(&action, outErr[1], STDERR_FILENO);
-        posix_spawn_file_actions_addclose(&action, outErr[0]);
-    }
-
-    int out[2];
-    if(stdOut)
-    {
-        pipe(out);
-        posix_spawn_file_actions_adddup2(&action, out[1], STDOUT_FILENO);
-        posix_spawn_file_actions_addclose(&action, out[0]);
-    }
     
     pid_t task_pid;
     int status = -200;
@@ -160,20 +138,6 @@ int spawnRoot(NSString* path, NSArray* args, NSString** stdOut, NSString** stdEr
             return -222;
         }
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-
-    if(stdOut)
-    {
-        close(out[1]);
-        NSString* output = getNSStringFromFile(out[0]);
-        *stdOut = output;
-    }
-
-    if(stdErr)
-    {
-        close(outErr[1]);
-        NSString* errorOutput = getNSStringFromFile(outErr[0]);
-        *stdErr = errorOutput;
-    }
     
     return WEXITSTATUS(status);
 }
