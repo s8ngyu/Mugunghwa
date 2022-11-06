@@ -13,6 +13,7 @@ class Rendition: Codable, Hashable {
     let keyAttributes: [UInt16:UInt16]
     var carID, assetType, assetName, name: String
     var edited: Bool?
+    var currentAssetsPath: URL?
     
     //Info for Color Rendition
     var rgbRed, rgbGreen, rgbBlue, alpha, monochromeGray: CGFloat?
@@ -174,10 +175,10 @@ extension Rendition {
     var image: UIImage? {
         get {
             print("printing car id and car path lookup")
-            if let themeStore = CUIStructuredThemeStore(path: carPathLookup) {
+            if let themeStore = CUIStructuredThemeStore(path: String(describing: currentAssetsPath!)) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     if assetType == "Vector" {
-                        if let catalog = try? CUICatalog(url: URL(fileURLWithPath: carPathLookup)),
+                        if let catalog = try? CUICatalog(url: currentAssetsPath!),
                             let namedVector = CUINamedVectorGlyph(name: assetName, using: CUIRenditionKey(keyList: keyList), fromTheme: catalog.storageRef), //can we get storeref via other means?
                             let svgData = cuiRendition.value(forKey: "rawData") as? Data,
                             let svgString = String(data: svgData, encoding: .utf8),
@@ -246,11 +247,11 @@ extension Rendition {
     
     var previewImage: UIImage? {
         get {
-            if let themeStore = CUIStructuredThemeStore(path: carPathLookup) {
+            if let themeStore = CUIStructuredThemeStore(path: String(describing: currentAssetsPath!)) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     let rect = CGRect(x: 0, y: 0, width: 72, height: 72) //preview grid size
                     if assetType == "Vector" {
-                        if let catalog = try? CUICatalog(url: URL(fileURLWithPath: carPathLookup)),
+                        if let catalog = try? CUICatalog(url: currentAssetsPath!),
                             let namedVector = CUINamedVectorGlyph(name: assetName, using: CUIRenditionKey(keyList: keyList), fromTheme: catalog.storageRef), //can we get storeref via other means?
                             let svgData = cuiRendition.value(forKey: "rawData") as? Data,
                             let svgString = String(data: svgData, encoding: .utf8),
@@ -318,7 +319,7 @@ extension Rendition {
     var editedImage: UIImage? {
         get {
             if edited ?? false {
-                let fileURL = docURL.appendingPathComponent(carID + "/Edits/" + name)
+                let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(carID + "/Edits/" + name)
                 print("yes edited")
                 print(fileURL)
                 return UIImage(contentsOfFile: fileURL.path)
@@ -352,7 +353,7 @@ extension Rendition {
                 }
             }
         } else if (assetType == "PDF" || assetType == "Vector" || assetType == "Raw Data") {
-            if let themeStore = CUIStructuredThemeStore(path: carPathLookup) {
+            if let themeStore = CUIStructuredThemeStore(path: Bundle.main.path(forResource: "example", ofType: "car")!) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     if assetType == "PDF" {
                         let data = cuiRendition.srcData
@@ -372,8 +373,8 @@ extension Rendition {
     //Edited here
     func saveEditedImage(_ uiImage: UIImage) {
         let fm = FileManager.default
-        print(docURL)
-        let editsFolder = docURL.appendingPathComponent(carID + "/Edits", isDirectory: true)
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!)
+        let editsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(carID + "/Edits", isDirectory: true)
         print("printing edits folder")
         print(editsFolder)
         if !fm.fileExists(atPath: editsFolder.path) {
@@ -397,7 +398,7 @@ extension Rendition {
     }
     
     func removeEditedImage() {
-        let fileURL = docURL.appendingPathComponent(carID + "/Edits/" + name)
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(carID + "/Edits/" + name)
         try? FileManager.default.removeItem(at: fileURL)
         edited = false
     }

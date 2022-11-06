@@ -129,16 +129,12 @@
 				8B23FAE328EC73740026617F /* Info.plist */,
 				8BC10E1728D4FE36005265FE /* mugunghwaApp.swift */,
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
-				8B51772828FBA7EC00860772 /* AssetCatalog.swift */,
-				8B51772A28FBA8ED00860772 /* Attributes.swift */,
-				8B51772C28FBA90300860772 /* BundleExt.swift */,
-				8B51772E28FBA92800860772 /* CoreUI_Reference.swift */,
-				8B51773028FBA94200860772 /* Rendition.swift */,
 				8BC10E2528D509E4005265FE /* HomeView.swift */,
 				8BC10E2728D5148B005265FE /* UtilityView.swift */,
 				8B51771528F6CE6B00860772 /* ThemesManageView.swift */,
 				8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */,
 				8BC10E1B28D4FE37005265FE /* Assets.xcassets */,
+				8BE23CF129093EC800AD2BC7 /* AssetCatalog */,
 				8BC10E1D28D4FE37005265FE /* Preview Content */,
 				8B0B9DBE28D606A900FFAB36 /* ObjcHelper.h */,
 				8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */,
@@ -156,6 +152,18 @@
 				8BC10E1E28D4FE37005265FE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8BE23CF129093EC800AD2BC7 /* AssetCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				8B51772828FBA7EC00860772 /* AssetCatalog.swift */,
+				8B51772A28FBA8ED00860772 /* Attributes.swift */,
+				8B51772C28FBA90300860772 /* BundleExt.swift */,
+				8B51772E28FBA92800860772 /* CoreUI_Reference.swift */,
+				8B51773028FBA94200860772 /* Rendition.swift */,
+			);
+			path = AssetCatalog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,7 +408,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/mugunghwa/PrivateFrameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -444,7 +452,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/mugunghwa/PrivateFrameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

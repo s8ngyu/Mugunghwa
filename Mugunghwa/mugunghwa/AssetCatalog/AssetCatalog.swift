@@ -6,9 +6,7 @@
 //
 
 import SwiftUI
-public var docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-public var carPathLookup = ""
-public var newCarPath = URL(string: "")
+
 class AssetCatalog: Codable, Hashable, Identifiable {
     
     var carID, name, path, bundleID: String
@@ -116,6 +114,7 @@ extension AssetCatalog {
                 let rendition = Rendition(themeRendition: cuiRendition, tokenCount: tokenCount)
                 rendition.assetName = themeStore.renditionName(forKeyList: rendition.keyList) ?? rendition.name  //looking up asset name is the bottomneck
                 rendition.carID = carID
+                rendition.currentAssetsPath = URL(string: path)
                 assetArray.append(rendition)
             }
         }
@@ -127,7 +126,7 @@ extension AssetCatalog {
         
         //Sync Edits
         let fm = FileManager.default
-        let editsFolder = docURL.appendingPathComponent(carID + "/Edits", isDirectory: true)
+        let editsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(carID + "/Edits", isDirectory: true)
         if fm.fileExists(atPath: editsFolder.path) {
             for rendition in renditions {
                 if fm.fileExists(atPath: editsFolder.appendingPathComponent(rendition.name).path) {
@@ -148,7 +147,7 @@ extension AssetCatalog {
     
     func exportAll() {
         let fm = FileManager.default
-        let carFolder = docURL.appendingPathComponent(carID, isDirectory: true)
+        let carFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
         if !fm.fileExists(atPath: carFolder.path) {
             try? fm.createDirectory(at: carFolder, withIntermediateDirectories: true, attributes: nil)
         }
@@ -165,14 +164,12 @@ extension AssetCatalog {
     
     func recompile() {
         let fm = FileManager.default
-        let carFolder = docURL.appendingPathComponent(carID, isDirectory: true)
+        let carFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
         if !fm.fileExists(atPath: carFolder.path) {
             try? fm.createDirectory(at: carFolder, withIntermediateDirectories: true, attributes: nil)
         }
-        let sourceCAR = carPathLookup
+        let sourceCAR = String(describing: path)
         let newCAR = carFolder.appendingPathComponent("Assets.car").path
-        NSLog("mugunghwaconsole \(newCAR)")
-        newCarPath = URL(string: newCAR)
         try? fm.removeItem(atPath: newCAR)
         try? fm.copyItem(atPath: sourceCAR, toPath: newCAR)
         
