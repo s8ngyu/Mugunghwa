@@ -63,12 +63,14 @@ class AppBundle: Identifiable {
     var path: URL?
     var bundlePath: URL?
     var bundleIdentifier: String
+    var isUpdating: Bool
     
     init() {
         self.id = ""
         self.path = nil
         self.bundlePath = nil
         self.bundleIdentifier = ""
+        self.isUpdating = false
     }
 }
 
@@ -86,11 +88,16 @@ extension AppBundle {
         
         bundlePath = getListOfDirectories(atPath: path!).first!
         
-        // create bak.assets if it doesn't exist
+        // check if the app is updating
         let fileManager = FileManager.default
-        
-        if (fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("Assets.car").path) && !fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("bak.car").path)) {
-            helper.copyWithRoot(at: bundlePath!.appendingPathComponent("Assets.car").path, to: bundlePath!.appendingPathComponent("bak.car").path)
+        if (fileManager.fileExists(atPath: withPath.appendingPathComponent("com.apple.mobileinstallation.placeholder").path)) {
+            // app is updating
+            isUpdating = true
+        } else {
+            // create bak.assets if it doesn't exist
+            if (fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("Assets.car").path) && !fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("bak.car").path)) {
+                helper.copyWithRoot(at: bundlePath!.appendingPathComponent("Assets.car").path, to: bundlePath!.appendingPathComponent("bak.car").path)
+            }
         }
     }
 }
