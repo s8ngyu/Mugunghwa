@@ -4,10 +4,10 @@ Features:
  - Badge colour changing
  - Home Gesture
  - Passcode theming
+ - Icon Theming
 
 Upcoming:
- - Icon Theming
- - Carrier Changer
+ - guess what!
 
 and more to come :)
 
