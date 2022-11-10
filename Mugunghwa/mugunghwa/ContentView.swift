@@ -39,6 +39,11 @@ struct ContentView: View {
                 .onReceive(success) { (output) in
                     showingSuccess.toggle()
                 }
+            CreditsView()
+                .tabItem {
+                    Image(systemName: "doc.plaintext.fill")
+                    Text("Credits")
+                }
         }
         .alert(isPresented: $showingInstalling) {
             Alert(title: Text("Installing"), message: Text("installing selected iconpack"), dismissButton: .default(Text("Okay")))
