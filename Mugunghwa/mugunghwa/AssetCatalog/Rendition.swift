@@ -353,7 +353,7 @@ extension Rendition {
                 }
             }
         } else if (assetType == "PDF" || assetType == "Vector" || assetType == "Raw Data") {
-            if let themeStore = CUIStructuredThemeStore(path: Bundle.main.path(forResource: "example", ofType: "car")!) {
+            if let themeStore = CUIStructuredThemeStore(path: String(describing: currentAssetsPath!)) {
                 if let cuiRendition = themeStore.rendition(withKey: keyList) {
                     if assetType == "PDF" {
                         let data = cuiRendition.srcData
