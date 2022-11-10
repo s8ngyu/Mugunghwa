@@ -114,7 +114,7 @@ extension AssetCatalog {
                 let rendition = Rendition(themeRendition: cuiRendition, tokenCount: tokenCount)
                 rendition.assetName = themeStore.renditionName(forKeyList: rendition.keyList) ?? rendition.name  //looking up asset name is the bottomneck
                 rendition.carID = carID
-                rendition.currentAssetsPath = URL(string: path)
+                rendition.currentAssetsPath = URL(fileURLWithPath: path)
                 assetArray.append(rendition)
             }
         }
