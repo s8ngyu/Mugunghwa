@@ -30,7 +30,7 @@ int main(int argc, char *argv[], char *envp[]) {
             NSString *to = [NSString stringWithUTF8String: argv[3]];
             if ([[NSFileManager defaultManager] fileExistsAtPath: at]) {
                 if ([[NSFileManager defaultManager] fileExistsAtPath: to]) [[NSFileManager defaultManager] removeItemAtPath: to error: nil];
-                [[NSFileManager defaultManager] moveItemAtPath: at toPath: to error:nil];
+                [[NSFileManager defaultManager] copyItemAtPath: at toPath: to error:nil];
             }
         }
 
