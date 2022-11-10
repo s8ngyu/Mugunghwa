@@ -11,6 +11,11 @@
 		8B0B9DC528D6AF0E00FFAB36 /* MGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */; };
 		8B10987F28D7192200732734 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B10987E28D7192200732734 /* Alamofire */; };
 		8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */; };
+		8B4DE9E62919D9C100FA1B94 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DE9E52919D9C100FA1B94 /* ThemeManager.swift */; };
+		8B4DE9E82919DA2700FA1B94 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DE9E72919DA2700FA1B94 /* Extensions.swift */; };
+		8B4DE9EA2919DA8D00FA1B94 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DE9E92919DA8D00FA1B94 /* ImagePicker.swift */; };
+		8B4DE9EC291A6D1F00FA1B94 /* webclip.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B4DE9EB291A6D1F00FA1B94 /* webclip.plist */; };
+		8B4DE9EE291A82AA00FA1B94 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DE9ED291A82AA00FA1B94 /* CreditsView.swift */; };
 		8B51771628F6CE6B00860772 /* ThemesManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51771528F6CE6B00860772 /* ThemesManageView.swift */; };
 		8B51771C28F8493100860772 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8B51771B28F8493100860772 /* ZipArchive */; };
 		8B51772928FBA7EC00860772 /* AssetCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51772828FBA7EC00860772 /* AssetCatalog.swift */; };
@@ -37,6 +42,12 @@
 		8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGPreferences.m; sourceTree = "<group>"; };
 		8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeThemeView.swift; sourceTree = "<group>"; };
 		8B23FAE328EC73740026617F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8B4DE9E329195DE000FA1B94 /* CoreServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreServices.h; sourceTree = "<group>"; };
+		8B4DE9E52919D9C100FA1B94 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		8B4DE9E72919DA2700FA1B94 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8B4DE9E92919DA8D00FA1B94 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		8B4DE9EB291A6D1F00FA1B94 /* webclip.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = webclip.plist; sourceTree = "<group>"; };
+		8B4DE9ED291A82AA00FA1B94 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		8B51771528F6CE6B00860772 /* ThemesManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesManageView.swift; sourceTree = "<group>"; };
 		8B51771E28FBA63000860772 /* CSIBitmapWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIBitmapWrapper.h; sourceTree = "<group>"; };
 		8B51771F28FBA64900860772 /* CSIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIGenerator.h; sourceTree = "<group>"; };
@@ -80,6 +91,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B4DE9E42919D99800FA1B94 /* Backends */ = {
+			isa = PBXGroup;
+			children = (
+				8B4DE9E52919D9C100FA1B94 /* ThemeManager.swift */,
+				8B4DE9E72919DA2700FA1B94 /* Extensions.swift */,
+				8B4DE9E92919DA8D00FA1B94 /* ImagePicker.swift */,
+			);
+			path = Backends;
+			sourceTree = "<group>";
+		};
 		8B51771D28FBA61500860772 /* AssetsHeaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,17 +152,21 @@
 				8BC10E1928D4FE36005265FE /* ContentView.swift */,
 				8BC10E2528D509E4005265FE /* HomeView.swift */,
 				8BC10E2728D5148B005265FE /* UtilityView.swift */,
+				8B4DE9ED291A82AA00FA1B94 /* CreditsView.swift */,
 				8B51771528F6CE6B00860772 /* ThemesManageView.swift */,
 				8B10988028D8BB2E00732734 /* PasscodeThemeView.swift */,
+				8B4DE9E42919D99800FA1B94 /* Backends */,
 				8BC10E1B28D4FE37005265FE /* Assets.xcassets */,
+				8B51771D28FBA61500860772 /* AssetsHeaders */,
 				8BE23CF129093EC800AD2BC7 /* AssetCatalog */,
 				8BC10E1D28D4FE37005265FE /* Preview Content */,
+				8B4DE9E329195DE000FA1B94 /* CoreServices.h */,
 				8B0B9DBE28D606A900FFAB36 /* ObjcHelper.h */,
 				8B0B9DBF28D606A900FFAB36 /* ObjcHelper.m */,
 				8B0B9DC328D6AF0E00FFAB36 /* MGPreferences.h */,
 				8B0B9DC428D6AF0E00FFAB36 /* MGPreferences.m */,
 				8B0B9DBD28D606A800FFAB36 /* mugunghwa-Bridging-Header.h */,
-				8B51771D28FBA61500860772 /* AssetsHeaders */,
+				8B4DE9EB291A6D1F00FA1B94 /* webclip.plist */,
 			);
 			path = mugunghwa;
 			sourceTree = "<group>";
@@ -233,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4DE9EC291A6D1F00FA1B94 /* webclip.plist in Resources */,
 				8BC10E1F28D4FE37005265FE /* Preview Assets.xcassets in Resources */,
 				8BC10E1C28D4FE37005265FE /* Assets.xcassets in Resources */,
 			);
@@ -255,9 +281,13 @@
 				8B51772F28FBA92800860772 /* CoreUI_Reference.swift in Sources */,
 				8BC10E1828D4FE36005265FE /* mugunghwaApp.swift in Sources */,
 				8B10988128D8BB2E00732734 /* PasscodeThemeView.swift in Sources */,
+				8B4DE9E82919DA2700FA1B94 /* Extensions.swift in Sources */,
 				8BC10E2828D5148B005265FE /* UtilityView.swift in Sources */,
+				8B4DE9EE291A82AA00FA1B94 /* CreditsView.swift in Sources */,
 				8B51772B28FBA8ED00860772 /* Attributes.swift in Sources */,
+				8B4DE9EA2919DA8D00FA1B94 /* ImagePicker.swift in Sources */,
 				8B51772928FBA7EC00860772 /* AssetCatalog.swift in Sources */,
+				8B4DE9E62919D9C100FA1B94 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +438,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/mugunghwa/PrivateFrameworks",
 				);
-				MARKETING_VERSION = 2.9;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -452,7 +482,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/mugunghwa/PrivateFrameworks",
 				);
-				MARKETING_VERSION = 2.9;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = me.soongyu.mugunghwautil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
