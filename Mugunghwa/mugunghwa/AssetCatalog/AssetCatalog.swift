@@ -147,7 +147,7 @@ extension AssetCatalog {
     
     func exportAll() {
         let fm = FileManager.default
-        let carFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        let carFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(carID, isDirectory: true)
         if !fm.fileExists(atPath: carFolder.path) {
             try? fm.createDirectory(at: carFolder, withIntermediateDirectories: true, attributes: nil)
         }
@@ -164,11 +164,11 @@ extension AssetCatalog {
     
     func recompile() {
         let fm = FileManager.default
-        let carFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        let carFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(carID, isDirectory: true)
         if !fm.fileExists(atPath: carFolder.path) {
             try? fm.createDirectory(at: carFolder, withIntermediateDirectories: true, attributes: nil)
         }
-        let sourceCAR = String(describing: path)
+        let sourceCAR = path
         let newCAR = carFolder.appendingPathComponent("Assets.car").path
         try? fm.removeItem(atPath: newCAR)
         try? fm.copyItem(atPath: sourceCAR, toPath: newCAR)

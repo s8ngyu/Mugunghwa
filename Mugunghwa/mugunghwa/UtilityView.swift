@@ -170,103 +170,11 @@ func homeGestureButtonDisabled(_ enabled: Bool) -> Bool {
     return false
 }
 
-// MARK: - Theme
-func getThemesList() -> [String] {
-    checkAndCreateBackupFolder()
-    
-    var tmp = ["Default"]
-    
-    let list = getList(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
-    for e in list {
-        tmp.append(e.lastPathComponent)
-    }
-    
-    return tmp
-}
-
-func getThemeSelection() -> Int {
-    let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
-    let tmp = prefs.dictionary["selectedTheme"]
-    
-    var selected = ""
-    if (tmp != nil) {
-        selected = prefs.dictionary["selectedTheme"] as! String
-    }
-    
-    if (selected == "Mugunghwa/Default") {
-        return 0
-    }
-    
-    if (selected != "") {
-        let selectedInInt = getThemesList().firstIndex(of: selected)
-        if (selectedInInt != nil) {
-            return selectedInInt!
-        } else {
-            return 0
-        }
-    }
-    
-    return 0
-}
-
-func getBundles() -> [AppBundle] {
-    var tmp = [AppBundle]()
-    let tmpBundleList = getList(atPath: URL(string: "/private/var/containers/Bundle/Application")!)
-    
-    for e in tmpBundleList {
-        let bundle = AppBundle.init(withPath: e)
-        tmp.append(bundle)
-    }
-    
-    return tmp
-}
-
-func applyTheme(selection: Int) {
-    let bundleList = getBundles()
-    let helper = ObjcHelper.init()
-    
-    if selection == 0 {
-        // revert to Default
-        for bundle in bundleList {
-            if FileManager.default.fileExists(atPath: bundle.bundlePath!.appendingPathComponent("bak.car").path) {
-                helper.moveWithRoot(at: bundle.bundlePath!.appendingPathComponent("bak.car").path, to: bundle.bundlePath!.appendingPathComponent("Assets.car").path)
-            }
-        }
-    } else {
-        // load theme
-        let theme = Theme.init(withPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!.appendingPathComponent(getThemesList()[selection]))
-        
-        for bundle in bundleList {
-            // continue if theme for this bundle exists
-            let themeImage = theme.getIcon(bundleIdentifier: bundle.bundleIdentifier)
-            if (themeImage != nil) {
-                // modify Assets.car
-                var catalog = AssetCatalog(filePath: bundle.bundlePath!.appendingPathComponent("Assets.car").path)
-                carPathLookup = bundle.bundlePath!.appendingPathComponent("Assets.car").path
-                
-                for rendition in catalog.renditions {
-                    if (rendition.assetType == "Icon") {
-                        rendition.saveEditedImage(themeImage!.imageResized(to: rendition.image!.size))
-                    }
-                }
-                
-                // recompile
-                catalog.recompile()
-                
-                helper.moveWithRoot(at: docURL.appendingPathComponent(catalog.carID).appendingPathComponent("Assets.car").path, to: bundle.bundlePath!.appendingPathComponent("Assets.car").path)
-            }
-        }
-    }
-}
-
-
 // MARK: - SwiftUI
 struct UtilityView: View {
     @State private var dotColour = Color.red
     @State private var homeGesture = getCurrentState()
     @State private var showingAlert = false
-    @State private var selectedTheme = getThemeSelection()
-    @State private var themesList = getThemesList()
     
     var body: some View {
         NavigationView {
@@ -313,25 +221,10 @@ struct UtilityView: View {
                     }).disabled(checkSandbox())
                 }
                 
-                Section(header: Text("Icon Theming"), footer: Text("Place icon images at /var/mobile/mugunghwa/Themes/(theme name)/\nYou can also import iconpack from Havoc by sharing it to Mugunghwa")) {
-                    Picker("Selected Theme", selection: $selectedTheme) {
-                        ForEach(0..<themesList.count, id: \.self) { num in
-                            Text("\(themesList[num])").tag(num)
-                        }
-                    }.onChange(of: selectedTheme) { tag in
-                        let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
-                        prefs.dictionary.setValue(themesList[tag], forKey: "selectedTheme")
-                        if tag == 0 {
-                            prefs.dictionary.setValue("Mugunghwa/Default", forKey: "selectedTheme")
-                        }
-                        prefs.updatePlist()
-                    }
+                Section(header: Text("Icon Theming"), footer: Text("Place icon images at /var/mobile/mugunghwa/Themes/(theme name)")) {
                     NavigationLink(destination: ThemesManageView(), label: {
                         Text("Manage Themes")
                     }).disabled(checkSandbox())
-                    Button("Apply") {
-                        applyTheme(selection: selectedTheme)
-                    }
                 }
             }
             .listStyle(.insetGrouped)

@@ -32,5 +32,9 @@
 	<true/>
 	<key>com.apple.security.personal-information.photos-library</key>
 	<true/>
+	<key>com.apple.private.security.storage.MobileDocuments</key>
+	<true/>
+	<key>com.apple.private.WebClips.read-write</key>
+	<true/>
 </dict>
 </plist>

@@ -7,117 +7,6 @@
 
 import SwiftUI
 
-extension URL {
-    var isDirectory: Bool {
-       (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
-    }
-}
-
-class Theme: Identifiable {
-    let id: UUID
-    var name: String
-    var path: URL?
-    var count: Int
-    
-    init() {
-        self.id = UUID()
-        self.name = ""
-        self.path = nil
-        self.count = 0
-    }
-}
-
-extension Theme {
-    convenience init(withPath: URL) {
-        self.init()
-        
-        name = withPath.lastPathComponent
-        path = withPath
-        count = getList(atPath: path!).count
-    }
-    
-    func getIcon(bundleIdentifier: String) -> UIImage? {
-        let helper = ObjcHelper.init()
-        let fileManager = FileManager.default
-        
-        var data: Data?
-        
-        if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)-large.png").path) {
-            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)-large.png").path)
-        } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)@3x.png").path) {
-            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)@3x.png").path)
-        } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)@2x.png").path) {
-            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)@2x.png").path)
-        } else {
-            return nil
-        }
-        
-        let image = UIImage(data: data!)
-        
-        return image
-    }
-}
-
-class AppBundle: Identifiable {
-    var id: String
-    var path: URL?
-    var bundlePath: URL?
-    var bundleIdentifier: String
-    var isUpdating: Bool
-    
-    init() {
-        self.id = ""
-        self.path = nil
-        self.bundlePath = nil
-        self.bundleIdentifier = ""
-        self.isUpdating = false
-    }
-}
-
-extension AppBundle {
-    convenience init(withPath: URL) {
-        self.init()
-        
-        // init
-        id = withPath.lastPathComponent
-        path = withPath
-        
-        let helper = ObjcHelper.init()
-        let metadata = helper.getDictionaryOfPlist(atPath: withPath.appendingPathComponent(".com.apple.mobile_container_manager.metadata.plist").path) as! Dictionary<String,Any>
-        bundleIdentifier = metadata["MCMMetadataIdentifier"] as! String
-        
-        bundlePath = getListOfDirectories(atPath: path!).first!
-        
-        // check if the app is updating
-        let fileManager = FileManager.default
-        if (fileManager.fileExists(atPath: withPath.appendingPathComponent("com.apple.mobileinstallation.placeholder").path)) {
-            // app is updating
-            isUpdating = true
-        } else {
-            // create bak.assets if it doesn't exist
-            if (fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("Assets.car").path) && !fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("bak.car").path)) {
-                helper.copyWithRoot(at: bundlePath!.appendingPathComponent("Assets.car").path, to: bundlePath!.appendingPathComponent("bak.car").path)
-            }
-        }
-    }
-}
-
-func getListOfDirectories(atPath: URL) -> [URL] {
-    var tmp = [URL]()
-    
-    do {
-        let dir: [URL] = try FileManager.default.contentsOfDirectory(at: atPath, includingPropertiesForKeys: nil)
-        for f in dir {
-            if f.isDirectory {
-                tmp.append(f)
-            }
-        }
-        return tmp
-    } catch {
-        return tmp
-    }
-}
-
 func getListOfThemes(atPath: URL) -> [Theme] {
     var tmp: [Theme] = [Theme]()
     
@@ -151,11 +40,12 @@ func getList(atPath: URL) -> [URL] {
 
 struct ThemesManageView: View {
     @State private var themes: [Theme] = getListOfThemes(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
+    @State private var selectedTheme: Theme? = getSelectedTheme()
     
     var body: some View {
         List {
             ForEach(themes) { theme in
-                ThemeRow(theme: theme)
+                ThemeRow(theme: theme, selectedTheme: $selectedTheme)
             }
             .onDelete(perform: delete)
         }.navigationTitle("Manage Themes")
@@ -164,7 +54,13 @@ struct ThemesManageView: View {
                 themes = getListOfThemes(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
             }
             .toolbar {
-                EditButton()
+                Button("Restore") {
+                    UIApplication.shared.indicator(title: "Restoring...")
+                    let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
+                    prefs.dictionary.setValue("Mugunghwa/Default", forKey: "selectedTheme")
+                    prefs.updatePlist()
+                    restoreTheme()
+                }
             }
     }
     
@@ -192,6 +88,8 @@ struct ThemeGroupLabel: View {
 
 struct ThemeRow: View {
     @State var theme: Theme
+    @Binding var selectedTheme: Theme?
+    @State private var showingFailedAlert = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -206,17 +104,46 @@ struct ThemeRow: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.facetime"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.calculator"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.mobilesafari"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.AppStore"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.Preferences"))
                     IconView(image: theme.getIcon(bundleIdentifier: "com.apple.mobilemail"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.mobilenotes"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.weather"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.mobilephone"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.MobileSMS"))
                     IconView(image: theme.getIcon(bundleIdentifier: "com.apple.Music"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.compass"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.weather"))
                     IconView(image: theme.getIcon(bundleIdentifier: "com.apple.Maps"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.news"))
-                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.measure"))
+                    IconView(image: theme.getIcon(bundleIdentifier: "com.apple.Health"))
                 }
+            }.alert(isPresented: $showingFailedAlert) {
+                Alert(
+                    title: Text("Failed!"),
+                    message: Text("Please select theme before applying.")
+                )
+            }
+            if theme.name == selectedTheme?.name {
+                Button {
+                    if (selectedTheme != nil) && FileManager.default.fileExists(atPath: selectedTheme!.path!.path) {
+                        UIApplication.shared.indicator(title: "Applying...")
+                        applyThemev2(selection: selectedTheme)
+                    } else {
+                        showingFailedAlert.toggle()
+                    }
+                } label: {
+                    Text("Apply")
+                        .frame(maxWidth: .infinity)
+                }.backport.applyProminentBorder()
+            } else {
+                Button {
+                    // select this
+                    selectedTheme = theme
+                    let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
+                    prefs.dictionary.setValue(selectedTheme!.name, forKey: "selectedTheme")
+                    prefs.updatePlist()
+                } label: {
+                    Text("Select")
+                        .frame(maxWidth: .infinity)
+                }.backport.applyBorder()
             }
         }
     }
