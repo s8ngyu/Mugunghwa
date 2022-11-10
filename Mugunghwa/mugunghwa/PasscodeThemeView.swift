@@ -9,32 +9,6 @@ import SwiftUI
 import UIKit
 import PhotosUI
 
-extension UIImage {
-    func imageResized(to size: CGSize) -> UIImage {
-        return UIGraphicsImageRenderer(size: size).image { _ in
-            draw(in: CGRect(origin: .zero, size: size))
-        }
-    }
-}
-
-struct Backport<Content: View> {
-    let content: Content
-}
-
-extension View {
-    var backport: Backport<Self> { Backport(content: self) }
-}
-
-extension Backport {
-    @ViewBuilder func applyBorder() -> some View {
-        if #available(iOS 15, *) {
-            self.content.buttonStyle(.bordered)
-        } else {
-            self.content
-        }
-    }
-}
-
 func getPath() -> String {
     let fileManager = FileManager.default
    
@@ -555,52 +529,6 @@ struct PasscodeThemeView: View {
                 
             }
         }.navigationTitle("Passcode Theming")
-    }
-}
-
-
-
-
-struct ImagePicker: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) private var presentationMode
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var selectedImage: UIImage
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
-
-        let imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = context.coordinator
-
-        return imagePicker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-        var parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
-            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                parent.selectedImage = image
-            }
-
-            parent.presentationMode.wrappedValue.dismiss()
-        }
-
     }
 }
 
