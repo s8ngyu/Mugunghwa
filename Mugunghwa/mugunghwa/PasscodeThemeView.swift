@@ -18,7 +18,7 @@ func getPath() -> String {
     
     let path = "/private/var/mobile/Library/Caches/"
     do {
-        let paths = try fileManager.contentsOfDirectory(at: URL(string: path)!, includingPropertiesForKeys: nil)
+        let paths = try fileManager.contentsOfDirectory(at: URL(fileURLWithPath: path), includingPropertiesForKeys: nil)
         var names = [String]()
         
         for path in paths {
@@ -27,7 +27,7 @@ func getPath() -> String {
         
         let name = names.filter({ $0.hasPrefix("Telep") })
         
-        let tryPath = URL(string: path)!.appendingPathComponent(name[0])
+        let tryPath = URL(fileURLWithPath: path).appendingPathComponent(name[0])
         
         return tryPath.path
     } catch {
@@ -41,7 +41,7 @@ func getValidNames(_ num: Int) -> [String] {
     var pathsToReturn = [String]()
     let fileManager = FileManager.default
     do {
-        let paths = try fileManager.contentsOfDirectory(at: URL(string: getPath())!, includingPropertiesForKeys: nil)
+        let paths = try fileManager.contentsOfDirectory(at: URL(fileURLWithPath: getPath()), includingPropertiesForKeys: nil)
         var names = [String]()
         
         for path in paths {
@@ -64,7 +64,7 @@ func getValidNames(_ num: Int) -> [String] {
 func getPathFor(_ num: Int) -> [String] {
     var paths = [String]()
     for e in getValidNames(num) {
-        paths.append(URL(string: getPath())!.appendingPathComponent(e).path)
+        paths.append(URL(fileURLWithPath: getPath()).appendingPathComponent(e).path)
     }
     
     return paths
@@ -73,7 +73,7 @@ func getPathFor(_ num: Int) -> [String] {
 func getOriginalPathFor(_ num: Int) -> [String] {
     var paths = [String]()
     for e in getValidNames(num) {
-        paths.append(URL(string: "/private/var/mobile/mugunghwa/Telephone")!.appendingPathComponent(e).path)
+        paths.append(URL(fileURLWithPath: "/private/var/mobile/mugunghwa/Telephone").appendingPathComponent(e).path)
     }
     
     return paths

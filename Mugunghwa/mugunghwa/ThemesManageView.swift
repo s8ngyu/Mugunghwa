@@ -39,7 +39,7 @@ func getList(atPath: URL) -> [URL] {
 }
 
 struct ThemesManageView: View {
-    @State private var themes: [Theme] = getListOfThemes(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
+    @State private var themes: [Theme] = getListOfThemes(atPath: URL(fileURLWithPath: "/private/var/mobile/mugunghwa/Themes"))
     @State private var selectedTheme: Theme? = getSelectedTheme()
     
     var body: some View {
@@ -51,7 +51,7 @@ struct ThemesManageView: View {
         }.navigationTitle("Manage Themes")
             .listStyle(.insetGrouped)
             .onAppear() {
-                themes = getListOfThemes(atPath: URL(string: "/private/var/mobile/mugunghwa/Themes")!)
+                themes = getListOfThemes(atPath: URL(fileURLWithPath: "/private/var/mobile/mugunghwa/Themes"))
             }
             .toolbar {
                 Button("Restore") {
