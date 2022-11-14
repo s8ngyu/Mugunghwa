@@ -62,7 +62,10 @@ class Apps: Identifiable {
     var localisedName: String
     var isUpdating: Bool
     var isSystem: Bool
+    var isTrollStoreInstalled: Bool
     var themable: Bool
+    var legacyThemable: Bool
+    var icons: [String]
     
     init() {
         self.id = UUID()
@@ -71,7 +74,10 @@ class Apps: Identifiable {
         self.localisedName = ""
         self.isUpdating = false
         self.isSystem = false
+        self.isTrollStoreInstalled = false
         self.themable = false
+        self.legacyThemable = false
+        self.icons = [String]()
     }
 }
 
@@ -79,14 +85,16 @@ extension Apps {
     convenience init(bundle: LSApplicationProxy) {
         self.init()
         
+        let fileManager = FileManager.default
+        let helper = ObjcHelper.init()
+        
         bundlePath = bundle.bundleURL
         bundleIdentifier = bundle.applicationIdentifier
         localisedName = bundle.localizedName()
         
         isSystem = bundlePath!.path.contains("Applications")
+        isTrollStoreInstalled = fileManager.fileExists(atPath: bundlePath!.deletingLastPathComponent().appendingPathComponent("_TrollStore").path)
         
-        let fileManager = FileManager.default
-        let helper = ObjcHelper.init()
         if !isSystem {
             isUpdating = fileManager.fileExists(atPath: bundlePath!.deletingLastPathComponent().appendingPathComponent("com.apple.mobileinstallation.placeholder").path)
         }
@@ -101,7 +109,49 @@ extension Apps {
                 helper.copyWithRoot(at: bundlePath!.appendingPathComponent("Assets.car").path, to: bundlePath!.appendingPathComponent("bak.car").path)
             }
         }
+        
+        if bundleIdentifier == "com.1conan.tsssaver" {
+            legacyThemable = true
+        }
+        
+        // test
+        if (isTrollStoreInstalled && !themable) {
+            let helper = ObjcHelper.init()
+            let infoPlist = NSDictionary(contentsOfFile: bundlePath!.appendingPathComponent("Info.plist").path)!
+            
+            icons = getIcons(dictionary: infoPlist)
+            
+            if icons.count != 0 {
+                // create backups if backup doesn't exist
+                for icon in icons {
+                    if (fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("\(icon).png").path) && !fileManager.fileExists(atPath: bundlePath!.appendingPathComponent("\(icon)bak.png").path)) {
+                        helper.copyWithRoot(at: bundlePath!.appendingPathComponent("\(icon).png").path, to: bundlePath!.appendingPathComponent("\(icon)bak.png").path)
+                    }
+                }
+                legacyThemable = true
+            }
+        }
+        
     }
+}
+
+func getIcons(dictionary: NSDictionary) -> [String] {
+    var tmp = [String]()
+    for key in dictionary.allKeys {
+        if String(describing: key) == "CFBundleIconFiles" {
+            tmp += dictionary[key] as? [String] ?? [String]()
+        } else {
+            tmp += getIcons(dictionary: dictionary[key] as? NSDictionary ?? [:])
+        }
+    }
+    
+    for (index, icon) in tmp.enumerated() {
+        if icon.contains(".png") {
+            tmp[index] = icon.replacingOccurrences(of: ".png", with: "")
+        }
+    }
+    
+    return Array(Set(tmp))
 }
 
 func getSelectedTheme() -> Theme? {
@@ -109,7 +159,7 @@ func getSelectedTheme() -> Theme? {
     let prefs = MGPreferences.init(identifier: "me.soongyu.mugunghwa")
     let tmp = prefs.dictionary["selectedTheme"]
     if (tmp != nil) {
-        let path = URL(string: "/private/var/mobile/mugunghwa/Themes")!.appendingPathComponent(tmp as! String)
+        let path = URL(fileURLWithPath: "/private/var/mobile/mugunghwa/Themes").appendingPathComponent(tmp as! String)
         let fileManager = FileManager.default
         
         if fileManager.fileExists(atPath: path.path) {
@@ -125,7 +175,7 @@ func getAppsList() -> [Apps] {
     var tmp = [Apps]()
     for e in apps {
         let app = Apps.init(bundle: e)
-        if app.themable && (app.bundleIdentifier != "com.apple.mobiletimer") {
+        if (app.themable || app.legacyThemable) && (app.bundleIdentifier != "com.apple.mobiletimer") {
             tmp.append(app)
         }
     }
@@ -144,6 +194,10 @@ func applyThemev2(selection: Theme?) {
         try? fileManager.createDirectory(atPath: "/private/var/mobile/mugunghwa/SystemAppsTheme", withIntermediateDirectories: true)
     }
     
+    if !fileManager.fileExists(atPath: "/private/var/mobile/mugunghwa/tmp") {
+        try? fileManager.createDirectory(atPath: "/private/var/mobile/mugunghwa/tmp", withIntermediateDirectories: true)
+    }
+    
     if (selection != nil) {
         for app in apps {
             if !app.isSystem {
@@ -151,29 +205,49 @@ func applyThemev2(selection: Theme?) {
                 // theme user apps
                 DispatchQueue.global(qos: .userInitiated).async {
                     //apply default before changing themes
-                    if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("bak.car").path) {
-                        helper.moveWithRoot(at: app.bundlePath!.appendingPathComponent("bak.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
+                    if !app.legacyThemable {
+                        if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("bak.car").path) {
+                            helper.copyWithRoot(at: app.bundlePath!.appendingPathComponent("bak.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
+                        }
+                    } else {
+                        for icon in app.icons {
+                            if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path) {
+                                helper.copyWithRoot(at: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path, to: app.bundlePath!.appendingPathComponent("\(icon).png").path)
+                            }
+                        }
                     }
+
                     //check if theme for this app exists
                     let themeImage = selection!.getIcon(bundleIdentifier: app.bundleIdentifier)
                     if (themeImage != nil) {
-                        //modify assets.car
-                        let catalog = AssetCatalog(filePath: app.bundlePath!.appendingPathComponent("Assets.car").path)
-                        
-                        for rendition in catalog.renditions {
-                            if (rendition.assetType == "Icon") {
-                                if (rendition.image != nil) {
-                                    rendition.saveEditedImage(themeImage!.imageResized(to: rendition.image!.size))
-                                } else {
-                                    rendition.saveEditedImage(themeImage!)
+                        if !app.legacyThemable {
+                            //modify assets.car
+                            let catalog = AssetCatalog(filePath: app.bundlePath!.appendingPathComponent("Assets.car").path)
+                            
+                            for rendition in catalog.renditions {
+                                if (rendition.assetType == "Icon") {
+                                    if (rendition.image != nil) {
+                                        rendition.saveEditedImage(themeImage!.imageResized(to: rendition.image!.size))
+                                    } else {
+                                        rendition.saveEditedImage(themeImage!)
+                                    }
                                 }
                             }
+                            
+                            // recompile
+                            catalog.recompile()
+                            // apply
+                            helper.moveWithRoot(at: fileManager.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(catalog.carID).appendingPathComponent("Assets.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
+                        } else {
+                            // modify images
+                            for icon in app.icons {
+                                let image = helper.getImageFromData(app.bundlePath!.appendingPathComponent("\(icon).png").path)
+                                var resized = themeImage!.imageResized(to: CGSize(width: image.size.width, height: image.size.height))
+                                resized = resized.imageResized(to: CGSize(width: resized.size.width/resized.scale, height: resized.size.height/resized.scale))
+                                helper.save(resized, atPath: "/private/var/mobile/mugunghwa/tmp/\(app.bundleIdentifier)-\(icon).png")
+                                helper.copyWithRoot(at: "/private/var/mobile/mugunghwa/tmp/\(app.bundleIdentifier)-\(icon).png", to: app.bundlePath!.appendingPathComponent("\(icon).png").path)
+                            }
                         }
-                        
-                        // recompile
-                        catalog.recompile()
-                        // apply
-                        helper.moveWithRoot(at: fileManager.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(catalog.carID).appendingPathComponent("Assets.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
                     }
                     group.leave()
                 }
@@ -183,8 +257,8 @@ func applyThemev2(selection: Theme?) {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let themeImage = selection!.getIcon(bundleIdentifier: app.bundleIdentifier)
                     if (themeImage != nil) {
-                        let webClipURL = URL(string: "/private/var/mobile/Library/WebClips/Mugunghwa-\(app.bundleIdentifier).webclip")!
-                        let iconURL = URL(string: "/private/var/mobile/mugunghwa/SystemAppsTheme/\(app.bundleIdentifier).png")!
+                        let webClipURL = URL(fileURLWithPath: "/private/var/mobile/Library/WebClips/Mugunghwa-\(app.bundleIdentifier).webclip")
+                        let iconURL = URL(fileURLWithPath: "/private/var/mobile/mugunghwa/SystemAppsTheme/\(app.bundleIdentifier).png")
                         // save image to SystemAppsTheme
                         helper.save(themeImage!, atPath: iconURL.path)
                         // check if webclip for this app exists
@@ -220,8 +294,16 @@ func restoreTheme() {
             group.enter()
             // user apps
             DispatchQueue.global(qos: .userInitiated).async {
-                if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("bak.car").path) {
-                    helper.moveWithRoot(at: app.bundlePath!.appendingPathComponent("bak.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
+                if !app.legacyThemable {
+                    if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("bak.car").path) {
+                        helper.moveWithRoot(at: app.bundlePath!.appendingPathComponent("bak.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
+                    }
+                } else {
+                    for icon in app.icons {
+                        if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path) {
+                            helper.copyWithRoot(at: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path, to: app.bundlePath!.appendingPathComponent("\(icon).png").path)
+                        }
+                    }
                 }
                 group.leave()
             }
@@ -229,7 +311,7 @@ func restoreTheme() {
             group.enter()
             // system apps
             DispatchQueue.global(qos: .userInitiated).async {
-                let webClipURL = URL(string: "/private/var/mobile/Library/WebClips/Mugunghwa-\(app.bundleIdentifier).webclip")!
+                let webClipURL = URL(fileURLWithPath: "/private/var/mobile/Library/WebClips/Mugunghwa-\(app.bundleIdentifier).webclip")
                 if fileManager.fileExists(atPath: webClipURL.path) {
                     try? fileManager.removeItem(atPath: webClipURL.path)
                 }
