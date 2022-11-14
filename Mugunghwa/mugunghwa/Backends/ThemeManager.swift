@@ -109,12 +109,6 @@ extension Apps {
                 helper.copyWithRoot(at: bundlePath!.appendingPathComponent("Assets.car").path, to: bundlePath!.appendingPathComponent("bak.car").path)
             }
         }
-        
-        if bundleIdentifier == "com.1conan.tsssaver" {
-            legacyThemable = true
-        }
-        
-        // test
         if (isTrollStoreInstalled && !themable) {
             let helper = ObjcHelper.init()
             let infoPlist = NSDictionary(contentsOfFile: bundlePath!.appendingPathComponent("Info.plist").path)!
@@ -131,7 +125,6 @@ extension Apps {
                 legacyThemable = true
             }
         }
-        
     }
 }
 
@@ -205,11 +198,12 @@ func applyThemev2(selection: Theme?) {
                 // theme user apps
                 DispatchQueue.global(qos: .userInitiated).async {
                     //apply default before changing themes
-                    if !app.legacyThemable {
+                    if app.themable {
                         if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("bak.car").path) {
                             helper.copyWithRoot(at: app.bundlePath!.appendingPathComponent("bak.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
                         }
-                    } else {
+                    }
+                    if app.legacyThemable {
                         for icon in app.icons {
                             if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path) {
                                 helper.copyWithRoot(at: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path, to: app.bundlePath!.appendingPathComponent("\(icon).png").path)
@@ -220,7 +214,7 @@ func applyThemev2(selection: Theme?) {
                     //check if theme for this app exists
                     let themeImage = selection!.getIcon(bundleIdentifier: app.bundleIdentifier)
                     if (themeImage != nil) {
-                        if !app.legacyThemable {
+                        if app.themable {
                             //modify assets.car
                             let catalog = AssetCatalog(filePath: app.bundlePath!.appendingPathComponent("Assets.car").path)
                             
@@ -238,7 +232,8 @@ func applyThemev2(selection: Theme?) {
                             catalog.recompile()
                             // apply
                             helper.moveWithRoot(at: fileManager.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent(catalog.carID).appendingPathComponent("Assets.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
-                        } else {
+                        }
+                        if app.legacyThemable {
                             // modify images
                             for icon in app.icons {
                                 let image = helper.getImageFromData(app.bundlePath!.appendingPathComponent("\(icon).png").path)
@@ -294,11 +289,12 @@ func restoreTheme() {
             group.enter()
             // user apps
             DispatchQueue.global(qos: .userInitiated).async {
-                if !app.legacyThemable {
+                if app.themable {
                     if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("bak.car").path) {
                         helper.moveWithRoot(at: app.bundlePath!.appendingPathComponent("bak.car").path, to: app.bundlePath!.appendingPathComponent("Assets.car").path)
                     }
-                } else {
+                }
+                if app.legacyThemable {
                     for icon in app.icons {
                         if fileManager.fileExists(atPath: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path) {
                             helper.copyWithRoot(at: app.bundlePath!.appendingPathComponent("\(icon)bak.png").path, to: app.bundlePath!.appendingPathComponent("\(icon).png").path)

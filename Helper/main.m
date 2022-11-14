@@ -15,7 +15,7 @@ int main(int argc, char *argv[], char *envp[]) {
 		int ret = 0;
 
 		NSString *cmd = [NSString stringWithUTF8String: argv[1]];
-        NSLog(@"%@ %d", cmd, argc);
+        NSLog(@"[mugunghwaconsole] %@ %d", cmd, argc);
 
         if ([cmd isEqualToString: @"cp"]) {
             if (argc <= 3) return -3;
@@ -23,7 +23,7 @@ int main(int argc, char *argv[], char *envp[]) {
             NSString *to = [NSString stringWithUTF8String: argv[3]];
             if ([[NSFileManager defaultManager] fileExistsAtPath: at]) {
                 if ([[NSFileManager defaultManager] fileExistsAtPath: to]) [[NSFileManager defaultManager] removeItemAtPath: to error: nil];
-                [[NSFileManager defaultManager] copyItemAtPath: at toPath: to error:nil];
+                [[NSFileManager defaultManager] copyItemAtPath: at toPath: to error: nil];
             }
         } else if ([cmd isEqualToString: @"mv"]) {
             if (argc <= 3) return -3;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[], char *envp[]) {
             NSString *to = [NSString stringWithUTF8String: argv[3]];
             if ([[NSFileManager defaultManager] fileExistsAtPath: at]) {
                 if ([[NSFileManager defaultManager] fileExistsAtPath: to]) [[NSFileManager defaultManager] removeItemAtPath: to error: nil];
-                [[NSFileManager defaultManager] moveItemAtPath: at toPath: to error:nil];
+                [[NSFileManager defaultManager] moveItemAtPath: at toPath: to error: nil];
             }
         }
 

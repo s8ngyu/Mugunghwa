@@ -57,7 +57,7 @@ extern int posix_spawnattr_set_persona_gid_np(const posix_spawnattr_t* __restric
 }
 
 -(void)saveImage:(UIImage *)image atPath:(NSString *)path {
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
 }
 
