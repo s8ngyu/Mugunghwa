@@ -39,6 +39,8 @@ extension Theme {
         
         if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)-large.png").path) {
             data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)-large.png").path)
+        } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier).png").path) {
+            data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier).png").path)
         } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)@3x.png").path) {
             data = helper.dataForImage(at: path!.appendingPathComponent("\(bundleIdentifier)@3x.png").path)
         } else if fileManager.fileExists(atPath: path!.appendingPathComponent("\(bundleIdentifier)@2x.png").path) {
