@@ -80,7 +80,6 @@ extern int posix_spawnattr_set_persona_gid_np(const posix_spawnattr_t* __restric
 }
 
 -(NSData *)dataForImageAt:(NSString *)path {
-    NSError *error;
     NSData *data = [NSData dataWithContentsOfFile:path];
     
     return data;
