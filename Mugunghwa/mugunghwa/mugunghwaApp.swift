@@ -24,7 +24,7 @@ struct mugunghwaApp: App {
 //                        //unzip
 //                        SSZipArchive.unzipFile(atPath: url.path, toDestination: "/private/var/mobile/mugunghwa/tmp/")
 //
-//                        let themes = getList(atPath: getList(atPath: URL(string: "/private/var/mobile/mugunghwa/tmp")!).first!)
+//                        let themes = getList(atPath: getList(atPath: URL(fileURLWithPath: "/private/var/mobile/mugunghwa/tmp")!).first!)
 //                        for e in themes {
 //                            try? fileManager.moveItem(atPath: e.path, toPath: "/private/var/mobile/mugunghwa/Themes/\(e.lastPathComponent)")
 //                        }
