@@ -21,7 +21,8 @@ int main(int argc, char *argv[], char *envp[]) {
             if (argc <= 3) return -3;
             NSString *at = [NSString stringWithUTF8String: argv[2]];
             NSString *to = [NSString stringWithUTF8String: argv[3]];
-            if ([[NSFileManager defaultManager] fileExistsAtPath: at] && ![[NSFileManager defaultManager] fileExistsAtPath: to]) {
+            if ([[NSFileManager defaultManager] fileExistsAtPath: at]) {
+                if ([[NSFileManager defaultManager] fileExistsAtPath: to]) [[NSFileManager defaultManager] removeItemAtPath: to error: nil];
                 [[NSFileManager defaultManager] copyItemAtPath: at toPath: to error:nil];
             }
         } else if ([cmd isEqualToString: @"mv"]) {
@@ -30,7 +31,7 @@ int main(int argc, char *argv[], char *envp[]) {
             NSString *to = [NSString stringWithUTF8String: argv[3]];
             if ([[NSFileManager defaultManager] fileExistsAtPath: at]) {
                 if ([[NSFileManager defaultManager] fileExistsAtPath: to]) [[NSFileManager defaultManager] removeItemAtPath: to error: nil];
-                [[NSFileManager defaultManager] copyItemAtPath: at toPath: to error:nil];
+                [[NSFileManager defaultManager] moveItemAtPath: at toPath: to error:nil];
             }
         }
 
